@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_admin_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".InicioAdmin">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/fondo"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/titulo_admin_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADMINISTRADOR"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/usuario_admin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/marco"
+                android:drawableLeft="@drawable/persona"
+                android:hint="Usuario"
+                android:drawablePadding="10dp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/contrasena_admin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/marco"
+                android:drawableLeft="@drawable/candado"
+                android:hint="Contraseña"
+                android:drawablePadding="10dp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="#000000" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_iniciar_sesion_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#E6A55C"
+                android:text="Iniciar Sesión"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="20dp" />
+            <TextView
+                android:id="@+id/textviewIniciousuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acceder como usuario"
+                android:textAlignment="center"
+
+                android:textColor="#000000"
+                android:textColorLink="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

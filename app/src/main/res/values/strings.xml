@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ConexionBBDD</string>
+    <string name="inicia_sesi_n">Inicia sesión</string>
+    <string name="registrar">REGISTRAR</string>
+    <string name="ya_est_s_registrado">¿Ya estás registrado?</string>
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Admin">Admin</string>
+    <string name="icono_config">Icono del menú de configuración</string>
+
+</resources>

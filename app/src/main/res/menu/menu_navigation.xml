@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Inicio"
+        android:icon="@drawable/baseline_home_24"
+        />
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Perfil"
+        android:icon="@drawable/persona" />
+    <item
+        android:id="@+id/nav_incis"
+        android:title="Mis Incidencias"
+        android:icon="@drawable/baseline_warning_24" />
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Configuración"
+        android:icon="@drawable/baseline_settings_24" />
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Cerrar sesión"
+        android:icon="@drawable/baseline_exit_to_app_24" />
+</menu>
