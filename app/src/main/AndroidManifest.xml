@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ConexionBBDD"
         tools:targetApi="35">
         <activity
-            android:name=".InicioAdmin"
+            android:name=".LoginAdminActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroActivity"

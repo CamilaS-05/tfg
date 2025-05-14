@@ -93,7 +93,7 @@ public class MainActivityAdmin extends AppCompatActivity {
                     editor.remove("nombre_admin");
                     editor.apply();
 
-                    Intent intent = new Intent(MainActivityAdmin.this, InicioAdmin.class);
+                    Intent intent = new Intent(MainActivityAdmin.this, LoginAdminActivity.class);
                     startActivity(intent);
                     finish();
                 }
