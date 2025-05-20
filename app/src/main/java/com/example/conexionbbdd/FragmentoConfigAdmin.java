@@ -26,6 +26,7 @@ public class FragmentoConfigAdmin extends Fragment {
         List<OpcionConfig> lista = Arrays.asList(
                 new OpcionConfig("Perfil", R.drawable.persona),
                 new OpcionConfig("Notificaciones", R.drawable.ic_notificaciones),
+                new OpcionConfig("Reportes", R.drawable.ic_incidencia),
                 new OpcionConfig("Apariencia", R.drawable.ic_apariencia),
                 new OpcionConfig("Eliminar cuenta", R.drawable.ic_eliminar)
         );
@@ -57,6 +58,9 @@ public class FragmentoConfigAdmin extends Fragment {
                     // abrir ajustes de apariencia
                     break;
                 case 3:
+                    // confirmar y eliminar cuenta
+                    break;
+                case 4:
                     // confirmar y eliminar cuenta
                     break;
             }

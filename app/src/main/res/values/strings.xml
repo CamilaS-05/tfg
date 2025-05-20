@@ -8,5 +8,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Admin">Admin</string>
     <string name="icono_config">Icono del menú de configuración</string>
+    <string-array name="estados_reporte">
+        <item>pendiente</item>
+        <item>en revisión</item>
+        <item>resuelta</item>
+    </string-array>
+
 
 </resources>

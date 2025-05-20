@@ -15,11 +15,20 @@
             android:id="@+id/nav_usuarios_admin"
             android:title="Usuarios"
             android:icon="@drawable/ic_usuarios" />
+        <item
+            android:id="@+id/nav_notificaciones_admin"
+            android:title="Notificaciones"
+            android:icon="@drawable/ic_notificaciones" />
 
         <item
             android:id="@+id/nav_settings_admin"
             android:title="Configuración"
             android:icon="@drawable/baseline_settings_24" />
+
+        <item
+            android:id="@+id/nav_reportes_admin"
+            android:title="Reportes"
+            android:icon="@drawable/ic_incidencia" />
 
         <item
             android:id="@+id/nav_logout_admin"

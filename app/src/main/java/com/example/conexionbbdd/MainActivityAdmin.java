@@ -3,6 +3,7 @@ package com.example.conexionbbdd;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class MainActivityAdmin extends AppCompatActivity {
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
     private ActionBarDrawerToggle toggle;
+    TextView textoBienvenida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +49,17 @@ public class MainActivityAdmin extends AppCompatActivity {
 
         // Obtener el nombre del administrador de SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-        String nombreAdmin = prefs.getString("nombre_admin", "Administrador");
+
 
         // Configurar el nombre en el encabezado del NavigationView
-        View headerView = navigationView.getHeaderView(0); // Obtén la vista del header
-        TextView nombreAdminTextView = headerView.findViewById(R.id.txtNombreAdmin); // Asegúrate que el ID coincide con el del XML
+        View headerView = navigationView.getHeaderView(0);
+        textoBienvenida = headerView.findViewById(R.id.txtNombreAdmin);
+        long idUsuario = prefs.getLong("id_admin", -1);
+        String nombreAdmin = prefs.getString("nombre_admin", "Administrador");
 
-        // Establecer el nombre del administrador en el TextView
-        nombreAdminTextView.setText("Bienvenido, " + nombreAdmin);
+        Log.d("MAIN_DEBUG", "ID cargado en MainActivity: " + idUsuario);
+
+        textoBienvenida.setText("Bienvenido, " + nombreAdmin);
 
         // Fragment por defecto
         if (savedInstanceState == null) {
@@ -81,10 +86,19 @@ public class MainActivityAdmin extends AppCompatActivity {
                 } else if (id == R.id.nav_usuarios_admin) {
                     Toast.makeText(MainActivityAdmin.this, "Gestión de usuarios", Toast.LENGTH_SHORT).show();
                     // Aquí puedes lanzar otro fragment o activity si quieres
-                } else if (id == R.id.nav_settings_admin) {
+                } else if (id == R.id.nav_notificaciones_admin) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
+                            .commit();
+                }else if (id == R.id.nav_reportes_admin) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, new FragmentoReportesAdmin())
+                            .commit();
+                }else if (id == R.id.nav_settings_admin) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, new FragmentoConfigAdmin())
                             .commit();
+
                 } else if (id == R.id.nav_logout_admin) {
                     Toast.makeText(MainActivityAdmin.this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
 

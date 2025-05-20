@@ -7,9 +7,9 @@ import retrofit2.http.POST;
 
 public interface AdministradorApi {
 
-    @FormUrlEncoded
     @POST("/api/administradores/login")
-    Call<String> loginAdmin(
+    @FormUrlEncoded
+    Call<LoginResponse> loginAdmin(
             @Field("usuarioadmin") String usuario,
             @Field("contrasenaadmin") String contrasena,
             @Field("origen_app") String origenApp

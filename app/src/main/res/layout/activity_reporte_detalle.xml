@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:text="Asunto:" style="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView android:id="@+id/txtAsunto" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        <TextView android:text="Descripción:" style="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView android:id="@+id/txtDescripcion" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        <TextView android:text="Estado actual:" style="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView android:id="@+id/txtEstadoActual" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        <TextView android:text="Fecha de creación:" style="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView android:id="@+id/txtFecha" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        <TextView android:text="Nuevo estado:" style="@style/TextAppearance.AppCompat.Medium" android:layout_marginTop="12dp"/>
+        <Spinner android:id="@+id/spinnerEstado" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnCambiarEstado"
+            android:text="Guardar cambio"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

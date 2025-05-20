@@ -3,6 +3,7 @@ package com.example.conexionbbdd;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private TextView nombreUsuarioTextView;
+    private TextView textoBienvenida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,18 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
 
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+
+
         // Configurar el nombre en el encabezado del NavigationView
-        View headerView = navigationView.getHeaderView(0); // Obtén la vista del header
-        TextView nombreUsuarioTextView = headerView.findViewById(R.id.txtNombreUsuario); // Asegúrate que el ID coincide con el del XML
-        String nombreUsuario = getIntent().getStringExtra("nombre_usuario");
-        // Establecer el nombre del usuario en el TextView
-        nombreUsuarioTextView.setText("Bienvenido, " + nombreUsuario);
+        View headerView = navigationView.getHeaderView(0);
+        textoBienvenida = headerView.findViewById(R.id.txtNombreUsuario);
+        long idUsuario = prefs.getLong("id_usuario", -1);
+        String nombreUsuario = prefs.getString("nombre_usuario", "Usuario");
+
+        Log.d("MAIN_DEBUG", "ID cargado en MainActivity: " + idUsuario);
+
+        textoBienvenida.setText("Bienvenido, " + nombreUsuario);
 
         // Fragmento por defecto al iniciar
         if (savedInstanceState == null) {

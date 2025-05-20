@@ -9,7 +9,7 @@ public interface UsuarioApi {
 
     @FormUrlEncoded
     @POST("/api/usuarios/login")
-    Call<String> login(
+    Call<LoginResponse> login(
             @Field("usuario") String usuario,
             @Field("contrasena") String contrasena,
             @Field("origen_app") String origenApp
