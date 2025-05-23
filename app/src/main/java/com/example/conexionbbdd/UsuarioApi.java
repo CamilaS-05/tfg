@@ -1,8 +1,11 @@
 package com.example.conexionbbdd;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UsuarioApi {
@@ -15,6 +18,8 @@ public interface UsuarioApi {
             @Field("origen_app") String origenApp
 
     );
+    @GET("/api/usuarios/incidencias")
+    Call<List<Usuario>> obtenerUsuariosIncidencias();
     @FormUrlEncoded
     @POST("/api/usuarios/registro")
     Call<String> registrarUsuario(

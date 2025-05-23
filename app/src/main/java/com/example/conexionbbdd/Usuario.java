@@ -1,24 +1,24 @@
 package com.example.conexionbbdd;
 
 
-    public class Usuario {
-        private int id;
-        private String nombre;
+import com.google.gson.annotations.SerializedName;
 
-        public String getNombre() {
-            return nombre;
-        }
+public class Usuario {
+    private int id;
+    private String nombrecompleto;
+    private String usuario;  // <-- AÑADIR ESTO
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-        public int getId() {
-            return id;
-        }
+    public String getNombrecompleto() { return nombrecompleto; }
+    public void setNombrecompleto(String nombrecompleto) { this.nombrecompleto = nombrecompleto; }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public String getUsuario() { return usuario; }  // <-- GETTER
+    public void setUsuario(String usuario) { this.usuario = usuario; }  // <-- SETTER
+
+    @Override
+    public String toString() {
+        return usuario != null ? usuario : "Usuario sin nombre";  // <-- MOSTRAR USUARIO EN SPINNER
     }
-
+}

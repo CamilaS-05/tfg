@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class FragmentoReportesAdmin extends Fragment {
 
     private RecyclerView recyclerReportes;
     private Spinner spinnerFiltro;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ReporteAdapter adapter;
 
     public FragmentoReportesAdmin() {}
 
@@ -40,17 +43,17 @@ public class FragmentoReportesAdmin extends Fragment {
 
         recyclerReportes = view.findViewById(R.id.recycler_reportes);
         spinnerFiltro = view.findViewById(R.id.spinner_filtro_estado);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         recyclerReportes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Adapter del spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
                 getContext(),
-                R.array.estados_filtro_array, // Este array debes crearlo en strings.xml
+                R.array.estados_filtro_array,
                 android.R.layout.simple_spinner_item
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFiltro.setAdapter(adapter);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFiltro.setAdapter(spinnerAdapter);
 
         spinnerFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -63,31 +66,54 @@ public class FragmentoReportesAdmin extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            String estadoSeleccionado = (String) spinnerFiltro.getSelectedItem();
+            if (estadoSeleccionado == null) estadoSeleccionado = "Todos";
+            cargarReportesFiltrados(estadoSeleccionado);
+        });
+
         cargarReportesFiltrados("Todos");
     }
 
     private void cargarReportesFiltrados(String estado) {
-        ReporteApi api = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
+        if (estado == null) estado = "Todos";
 
-        Call<List<Reporte>> call;
+        ReporteApi api = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
+        Call<List<ReporteDTO>> call;
+
         if (estado.equals("Todos")) {
-            call = api.obtenerReportes();
+            call = api.listarReportesDTO();
         } else {
-            call = api.obtenerReportesPorEstado(estado.toLowerCase()); // asegúrate que tu endpoint lo soporte
+            call = api.listarReportesDTOPorEstado(estado.toLowerCase());
         }
 
-        call.enqueue(new Callback<List<Reporte>>() {
+        call.enqueue(new Callback<List<ReporteDTO>>() {
             @Override
-            public void onResponse(Call<List<Reporte>> call, Response<List<Reporte>> response) {
+            public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
+                swipeRefreshLayout.setRefreshing(false); // ✅ Parar animación
+
                 if (response.isSuccessful() && response.body() != null) {
-                    recyclerReportes.setAdapter(new ReporteAdapter(getContext(), response.body()));
+                    if (adapter == null) {
+                        adapter = new ReporteAdapter(getContext(), response.body());
+                        recyclerReportes.setAdapter(adapter);
+
+                        adapter.setOnUsuarioAsignadoListener(() -> {
+                            String filtroActual = (String) spinnerFiltro.getSelectedItem();
+                            if (filtroActual == null) filtroActual = "Todos";
+                            cargarReportesFiltrados(filtroActual);
+                        });
+
+                    } else {
+                        adapter.updateData(response.body());
+                    }
                 } else {
                     Toast.makeText(getContext(), "Error al cargar reportes", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Reporte>> call, Throwable t) {
+            public void onFailure(Call<List<ReporteDTO>> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false); // ✅ Parar animación
                 Toast.makeText(getContext(), "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
