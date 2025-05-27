@@ -9,6 +9,7 @@ public class Notificacion implements Serializable {
     private boolean leido;
     private String fecha;
     private String tipo_destino;
+    private Integer idReporte; // Asegúrate que venga del backend
 
     // Getters y setters
     public int getId() { return id; }
@@ -31,4 +32,12 @@ public class Notificacion implements Serializable {
     public void setLeido(boolean leido) { this.leido = leido; }
     public void setFecha(String fecha) { this.fecha = fecha; }
     public void setTipo_destino(String tipo_destino) { this.tipo_destino = tipo_destino; }
+
+    public Integer getIdReporte() {
+        return idReporte;
+    }
+
+    public void setIdReporte(Integer idReporte) {
+        this.idReporte = idReporte;
+    }
 }

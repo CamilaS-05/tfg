@@ -1,7 +1,5 @@
 package com.example.conexionbbdd;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,20 +32,22 @@ public class FragmentoNotificacionesAdmin extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         recyclerView = view.findViewById(R.id.recycler_notificaciones);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         adapter = new NotificacionAdapter(listaNotificaciones);
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(this::cargarNotificaciones);
 
         cargarNotificaciones();
+
         return view;
     }
 
     private void cargarNotificaciones() {
-        swipeRefreshLayout.setRefreshing(true); // Muestra el indicador de carga
+        swipeRefreshLayout.setRefreshing(true);
 
         NotificacionApi api = RetrofitClient.getRetrofitInstance().create(NotificacionApi.class);
-        Call<List<Notificacion>> call = api.obtenerNotificacionesAdmin("incidencias");
+        Call<List<Notificacion>> call = api.obtenerNotificacionesAdmin("incidencias"); // Ajusta el parámetro si quieres
 
         call.enqueue(new Callback<List<Notificacion>>() {
             @Override
@@ -55,11 +55,8 @@ public class FragmentoNotificacionesAdmin extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
 
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Notificacion> notificaciones = response.body();
-                    Toast.makeText(getContext(), "Recibidas: " + notificaciones.size(), Toast.LENGTH_SHORT).show(); // 👈
-
                     listaNotificaciones.clear();
-                    listaNotificaciones.addAll(notificaciones);
+                    listaNotificaciones.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getContext(), "Respuesta vacía o incorrecta", Toast.LENGTH_SHORT).show();

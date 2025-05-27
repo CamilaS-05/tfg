@@ -3,6 +3,7 @@ package com.example.conexionbbdd;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public interface ReporteApi {
             @Query("estado") String estado
     );
 
-
-
+    @GET("/api/reporte/{id}")
+    Call<Reporte> getReportePorId(@Path("id") int idReporte);
 
 
 }

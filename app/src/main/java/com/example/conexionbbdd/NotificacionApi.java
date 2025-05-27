@@ -22,4 +22,6 @@ public interface NotificacionApi {
 
     @PUT("/api/notificacion/{id}/leida")
     Call<Void> marcarComoLeida(@Path("id") int id);
+    @GET("/api/notificacion/{id}/detalle-reporte")
+    Call<Reporte> getReporteYMarcarLeido(@Path("id") int idNotificacion);
 }

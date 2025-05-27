@@ -28,16 +28,14 @@ public class MainActivityAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);  // Asegúrate de que este layout existe
+        setContentView(R.layout.activity_admin_main);
 
-        // Referencias
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view_admin);
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
 
-        // Toggle para abrir/cerrar el drawer desde el toolbar
         toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -47,11 +45,8 @@ public class MainActivityAdmin extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Obtener el nombre del administrador de SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
 
-
-        // Configurar el nombre en el encabezado del NavigationView
         View headerView = navigationView.getHeaderView(0);
         textoBienvenida = headerView.findViewById(R.id.txtNombreAdmin);
         long idUsuario = prefs.getLong("id_admin", -1);
@@ -61,7 +56,6 @@ public class MainActivityAdmin extends AppCompatActivity {
 
         textoBienvenida.setText("Bienvenido, " + nombreAdmin);
 
-        // Fragment por defecto
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, new PantallaPrincipalAdmin())
@@ -69,52 +63,45 @@ public class MainActivityAdmin extends AppCompatActivity {
             navigationView.setCheckedItem(R.id.nav_home_admin);
         }
 
-        // Navegación de opciones del menú
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-                if (id == R.id.nav_home_admin) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new PantallaPrincipalAdmin())
-                            .commit();
-                }else if (id == R.id.nav_profile_admin) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new FragmentoPerfilAdmin())
-                            .commit();
-                } else if (id == R.id.nav_usuarios_admin) {
-                    Toast.makeText(MainActivityAdmin.this, "Gestión de usuarios", Toast.LENGTH_SHORT).show();
-                    // Aquí puedes lanzar otro fragment o activity si quieres
-                } else if (id == R.id.nav_notificaciones_admin) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
-                            .commit();
-                }else if (id == R.id.nav_reportes_admin) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new FragmentoReportesAdmin())
-                            .commit();
-                }else if (id == R.id.nav_settings_admin) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new FragmentoConfigAdmin())
-                            .commit();
+            if (id == R.id.nav_home_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new PantallaPrincipalAdmin())
+                        .commit();
+            } else if (id == R.id.nav_profile_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoPerfilAdmin())
+                        .commit();
+            } else if (id == R.id.nav_usuarios_admin) {
+                Toast.makeText(MainActivityAdmin.this, "Gestión de usuarios", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_notificaciones_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
+                        .commit();
+            } else if (id == R.id.nav_reportes_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoReportesAdmin())
+                        .commit();
+            } else if (id == R.id.nav_settings_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoConfigAdmin())
+                        .commit();
+            } else if (id == R.id.nav_logout_admin) {
+                Toast.makeText(MainActivityAdmin.this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
 
-                } else if (id == R.id.nav_logout_admin) {
-                    Toast.makeText(MainActivityAdmin.this, "Cerrando sesión...", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove("nombre_admin");
+                editor.apply();
 
-                    // Eliminar el nombre del administrador de SharedPreferences
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.remove("nombre_admin");
-                    editor.apply();
-
-                    Intent intent = new Intent(MainActivityAdmin.this, LoginAdminActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
-                drawerLayout.closeDrawers();
-                return true;
+                Intent intent = new Intent(MainActivityAdmin.this, LoginAdminActivity.class);
+                startActivity(intent);
+                finish();
             }
+
+            drawerLayout.closeDrawers();
+            return true;
         });
     }
 }
