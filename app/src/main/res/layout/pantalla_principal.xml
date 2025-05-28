@@ -1,25 +1,122 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/amarillento">
+    android:background="#F3E8FF"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="24dp">
+
+        <EditText
+            android:id="@+id/etBuscar"
+            android:layout_weight="1"
+            android:hint="Buscar incidencia..."
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:background="@drawable/search_edittext_background"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/iconoNotificaciones"
+            android:src="@drawable/ic_notificaciones"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Notificaciones" />
+    </LinearLayout>
 
     <TextView
-        android:text="INCIDENCIAS"
-        android:textSize="24sp"
-        android:textColor="@android:color/white"
+        android:id="@+id/txtSaludo"
+        android:layout_below="@id/topBar"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hola, Usuario!"
+        android:textSize="18sp"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="300dp"/>
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
 
-    <Button
-        android:id="@+id/btn_go_to_profile"
-        android:text="Ir al Perfil"
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"/>
+        android:layout_height="60dp"
+        android:background="#D1C4E9"
+        android:gravity="center"
+        android:weightSum="3"
+        android:layout_marginBottom="16dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/navIncidencias"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/baseline_warning_24" />
+            <TextView
+                android:text="Incidencias"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navPerfil"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:src="@drawable/persona"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+            <TextView
+                android:text="Perfil"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navSoporte"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:src="@drawable/baseline_settings_24"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+            <TextView
+                android:text="Ajustes"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
