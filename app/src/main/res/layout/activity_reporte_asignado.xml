@@ -1,87 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FAFAFA"
+    android:background="#F0F4F8"
     android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:elevation="4dp"
-        android:padding="24dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDetalleReporte"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:clipToPadding="false">
+        android:padding="24dp"
+        android:background="@android:color/white"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/txtAsunto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:textColor="#212121"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtDescripcion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="#424242"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@id/txtAsunto"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Asunto centrado, fuente moderna -->
+            <TextView
+                android:id="@+id/txtAsunto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:textColor="#263238"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5" />
 
-        <TextView
-            android:id="@+id/txtEstadoActual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#00796B"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintTop_toBottomOf="@id/txtDescripcion"
-            app:layout_constraintStart_toStartOf="parent"/>
+            <!-- Descripción con margen izquierda, color gris suave -->
+            <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="35dp"
+                android:textColor="#546E7A"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                app:layout_constraintTop_toBottomOf="@id/txtAsunto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/txtFecha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#757575"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/txtEstadoActual"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="24dp"/>
+            <!-- Estado actual con margen izquierda y color distintivo -->
+            <TextView
+                android:id="@+id/txtEstadoActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#388E3C"
+                android:textSize="16sp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintTop_toBottomOf="@id/txtDescripcion"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinnerNuevoEstado"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#009688"
-            android:popupBackground="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@id/txtFecha"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="24dp"/>
+            <!-- Fecha con margen izquierda y color gris -->
+            <TextView
+                android:id="@+id/txtFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#78909C"
+                android:textSize="14sp"
+                android:layout_marginStart="35dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="sans-serif"
+                app:layout_constraintTop_toBottomOf="@id/txtEstadoActual"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btnCambiarEstado"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Cambiar Estado"
-            android:backgroundTint="#009688"
-            android:textColor="@android:color/white"
-            android:paddingVertical="12dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintTop_toBottomOf="@id/spinnerNuevoEstado"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Texto "Cambiar estado" encima del Spinner -->
+            <TextView
+                android:id="@+id/txtLabelSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cambiar estado"
+                android:textColor="#546E7A"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginStart="35dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@id/txtFecha"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <!-- Spinner ancho con fondo y bordes redondeados -->
+            <Spinner
+                android:id="@+id/spinnerNuevoEstado"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_spinner_rounded"
+                android:popupBackground="@android:color/white"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtLabelSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Botón centrado con bordes redondeados y sombra -->
+            <Button
+                android:id="@+id/btnCambiarEstado"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="208dp"
+                android:layout_marginEnd="56dp"
+                android:backgroundTint="#4CAF50"
+                android:text="Cambiar Estado"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerNuevoEstado" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

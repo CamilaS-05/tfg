@@ -9,9 +9,9 @@
     <string name="Admin">Admin</string>
     <string name="icono_config">Icono del menú de configuración</string>
     <string-array name="estados_reporte">
-        <item>pendiente</item>
-        <item>en revisión</item>
-        <item>resuelta</item>
+        <item>Pendiente</item>
+        <item>En progreso</item>
+        <item>Resuelta</item>
     </string-array>
 
 
