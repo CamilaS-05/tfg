@@ -1,6 +1,7 @@
 package com.example.conexionbbdd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,12 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
         holder.textViewEstado.setText("Estado: " + reporte.getEstado());
         holder.textViewFecha.setText("Fecha: " + reporte.getFecha());
 
-        // Puedes usar 'context' o 'reporteApi' aquí si necesitas
+        // Aquí agregas el listener para abrir la actividad
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ReporteAsignadoActivity.class);
+            intent.putExtra("id_reporte", reporte.getId()); // Envías el ID del reporte
+            context.startActivity(intent);
+        });
     }
 
     @Override

@@ -40,6 +40,8 @@
         <activity
             android:name=".DetalleReporteActivity"
             android:exported="true" />
+        <activity
+            android:name=".ReporteAsignadoActivity" />
     </application>
 
 </manifest>

@@ -36,16 +36,29 @@ public class FragmentoMisIncidencias extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        reporteApi = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
+
+        cargarReportesAsignados();
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarReportesAsignados();
+    }
+
+    private void cargarReportesAsignados() {
         SharedPreferences prefs = requireActivity().getSharedPreferences("MisPreferencias", getContext().MODE_PRIVATE);
         long idUsuarioLong = prefs.getLong("id_usuario", -1);
 
         if (idUsuarioLong == -1) {
             Toast.makeText(getContext(), "Error: usuario no identificado", Toast.LENGTH_SHORT).show();
-            return view;
+            return;
         }
 
         int idUsuarioActual = (int) idUsuarioLong;
-        reporteApi = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
 
         reporteApi.getReportesAsignados(idUsuarioActual).enqueue(new Callback<List<ReporteDTO>>() {
             @Override
@@ -63,7 +76,5 @@ public class FragmentoMisIncidencias extends Fragment {
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
 }
