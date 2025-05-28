@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, new FragmentoConfig())
                             .commit();
+                }else if (id == R.id.nav_incis) {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_frame, new FragmentoMisIncidencias())
+                                .commit();
+
                 } else if (id == R.id.nav_logout) {
                     // Limpiar SharedPreferences para cerrar sesión
                     SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);

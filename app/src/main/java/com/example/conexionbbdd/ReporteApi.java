@@ -24,6 +24,11 @@ public interface ReporteApi {
             @Query("id_usuario") int idUsuario
     );
 
+    @GET("/api/reporte/asignados")
+    Call<List<ReporteDTO>> getReportesAsignados(
+            @Query("id_usuario") int idUsuario
+    );
+
     @GET("/api/reporte/listarReporteEstado")
     Call<List<ReporteDTO>> listarReportesDTOPorEstado(
             @Query("estado") String estado
