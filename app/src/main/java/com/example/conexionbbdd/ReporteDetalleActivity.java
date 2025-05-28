@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.conexionbbdd.ReporteApi;
 import com.example.conexionbbdd.Reporte;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,8 +53,11 @@ public class ReporteDetalleActivity extends AppCompatActivity {
             txtAsunto.setText(reporte.getAsunto());
             txtDescripcion.setText(reporte.getDescripcion());
             txtEstado.setText(reporte.getEstado());
-            txtFecha.setText(reporte.getFecha_creacion());
+            txtFecha.setText(formatoFecha(reporte.getFechaCreacion()));
+
         }
+
+
 
         // Spinner de estados
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -82,7 +88,17 @@ public class ReporteDetalleActivity extends AppCompatActivity {
             cambiarEstadoReporte(idReporte, estadoSeleccionado);
         });
     }
-
+    private String formatoFecha(String fechaISO) {
+        if (fechaISO == null || fechaISO.isEmpty()) return "Fecha no disponible";
+        try {
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date date = isoFormat.parse(fechaISO);
+            SimpleDateFormat formatoLocal = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return formatoLocal.format(date);
+        } catch (Exception e) {
+            return fechaISO;
+        }
+    }
     private void cambiarEstadoReporte(int idReporte, String nuevoEstado) {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         ReporteApi api = retrofit.create(ReporteApi.class);
@@ -104,5 +120,7 @@ public class ReporteDetalleActivity extends AppCompatActivity {
                 Toast.makeText(ReporteDetalleActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 }

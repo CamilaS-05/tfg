@@ -2,7 +2,6 @@ package com.example.conexionbbdd;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -12,7 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,9 +50,16 @@ public class ReporteAsignadoActivity extends AppCompatActivity {
 
         cargarDetalleReporte(idReporte);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.estados_reporte, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Lista de estados, la misma que en tu string-array o la que quieras:
+        List<String> estadosList = Arrays.asList("Pendiente", "En Proceso", "Resuelto", "Cerrado");
+
+        // Adapter personalizado con layouts para spinner bonito
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.item_spinner_selected,  // Layout para el item seleccionado
+                estadosList);
+
+        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown); // Layout para dropdown
         spinnerNuevoEstado.setAdapter(adapter);
 
         btnCambiarEstado.setOnClickListener(view -> cambiarEstado());
@@ -66,12 +74,13 @@ public class ReporteAsignadoActivity extends AppCompatActivity {
                     txtAsunto.setText(reporte.getAsunto());
                     txtDescripcion.setText(reporte.getDescripcion());
                     txtEstadoActual.setText("Estado actual: " + reporte.getEstado());
-                    txtFecha.setText("Fecha: " + formatoFecha(reporte.getFecha_creacion()));
+                    txtFecha.setText(formatoFecha(reporte.getFechaCreacion()));
                 } else {
                     Toast.makeText(ReporteAsignadoActivity.this, "No se pudo cargar el reporte", Toast.LENGTH_SHORT).show();
                 }
             }
             private String formatoFecha(String fechaISO) {
+                if (fechaISO == null || fechaISO.isEmpty()) return "Fecha no disponible";
                 try {
                     SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
                     Date date = isoFormat.parse(fechaISO);
@@ -91,27 +100,25 @@ public class ReporteAsignadoActivity extends AppCompatActivity {
     }
 
     private void cambiarEstado() {
-        btnCambiarEstado.setOnClickListener(v -> {
-            String nuevoEstado = spinnerNuevoEstado.getSelectedItem().toString();
-            reporteApi.cambiarEstado(idReporte, nuevoEstado).enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(ReporteAsignadoActivity.this, "Estado actualizado", Toast.LENGTH_SHORT).show();
+        String nuevoEstado = spinnerNuevoEstado.getSelectedItem().toString();
+        reporteApi.cambiarEstado(idReporte, nuevoEstado).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(ReporteAsignadoActivity.this, "Estado actualizado", Toast.LENGTH_SHORT).show();
 
-                        // ✅ Esto cerrará la actividad y volverá al Fragmento
-                        setResult(Activity.RESULT_OK); // opcional
-                        finish();
-                    } else {
-                        Toast.makeText(ReporteAsignadoActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show();
-                    }
+                    // ✅ Esto cerrará la actividad y volverá al Fragmento
+                    setResult(Activity.RESULT_OK); // opcional
+                    finish();
+                } else {
+                    Toast.makeText(ReporteAsignadoActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(ReporteAsignadoActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
-                }
-            });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(ReporteAsignadoActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

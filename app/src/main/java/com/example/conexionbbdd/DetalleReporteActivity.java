@@ -58,7 +58,8 @@ public class DetalleReporteActivity extends AppCompatActivity {
                    txtitulo.setText("REPORTE DETALLADO");
                     txtAsunto.setText( reporte.getAsunto());
                     txtDescripcion.setText( reporte.getDescripcion());
-                    txtFecha.setText(formatoFecha(reporte.getFecha_creacion()));
+                    txtFecha.setText(formatoFecha(reporte.getFechaCreacion()));
+
 
                 } else {
                     Toast.makeText(DetalleReporteActivity.this, "Error al cargar el reporte", Toast.LENGTH_SHORT).show();
@@ -75,6 +76,7 @@ public class DetalleReporteActivity extends AppCompatActivity {
     }
 
     private String formatoFecha(String fechaISO) {
+        if (fechaISO == null || fechaISO.isEmpty()) return "Fecha no disponible";
         try {
             SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
             Date date = isoFormat.parse(fechaISO);
