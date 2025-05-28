@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,13 +25,17 @@ public class FragmentoMisIncidencias extends Fragment {
     private RecyclerView recyclerView;
     private ReporteApi reporteApi;
 
+    private ReporteAsignadoAdapter adapter;      // Guardamos referencia para filtrar
+    private List<ReporteDTO> listaOriginal;      // Lista completa para filtrar
+
     public FragmentoMisIncidencias() {
         // Constructor vacío obligatorio
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_incidencias, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
@@ -64,8 +69,9 @@ public class FragmentoMisIncidencias extends Fragment {
             @Override
             public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ReporteDTO> lista = response.body();
-                    recyclerView.setAdapter(new ReporteAsignadoAdapter(lista, getContext(), reporteApi));
+                    listaOriginal = response.body();  // Guardamos la lista completa
+                    adapter = new ReporteAsignadoAdapter(listaOriginal, getContext(), reporteApi);
+                    recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "No se encontraron reportes", Toast.LENGTH_SHORT).show();
                 }
@@ -76,5 +82,34 @@ public class FragmentoMisIncidencias extends Fragment {
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * Filtra localmente la lista de reportes por asunto, nombreAsignado y fecha.
+     * Puede llamarse desde la actividad o fragmento padre que tenga el input de búsqueda.
+     */
+    public void filtrarReportes(String asunto, String nombreAsignado, String fecha) {
+        if (adapter == null || listaOriginal == null) {
+            return; // No hay datos para filtrar todavía
+        }
+
+        List<ReporteDTO> listaFiltrada = new ArrayList<>();
+
+        for (ReporteDTO r : listaOriginal) {
+            boolean cumpleAsunto = asunto == null || asunto.isEmpty() ||
+                    r.getAsunto().toLowerCase().contains(asunto.toLowerCase());
+
+            boolean cumpleNombre = nombreAsignado == null || nombreAsignado.isEmpty() ||
+                    r.getNombreAsignado().toLowerCase().contains(nombreAsignado.toLowerCase());
+
+            boolean cumpleFecha = fecha == null || fecha.isEmpty() ||
+                    r.getFecha().toLowerCase().contains(fecha.toLowerCase());
+
+            if (cumpleAsunto && cumpleNombre && cumpleFecha) {
+                listaFiltrada.add(r);
+            }
+        }
+
+        adapter.actualizarLista(listaFiltrada);
     }
 }

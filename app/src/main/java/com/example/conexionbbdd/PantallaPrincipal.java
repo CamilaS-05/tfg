@@ -1,5 +1,7 @@
 package com.example.conexionbbdd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +24,9 @@ public class PantallaPrincipal extends Fragment {
 
     private LinearLayout navIncidencias, navPerfil, navSoporte;
 
+    // Referencia al fragmento para llamar a filtrar
+    private FragmentoMisIncidencias fragmentoMisIncidencias;
+
     public PantallaPrincipal() {}
 
     @Override
@@ -37,8 +42,10 @@ public class PantallaPrincipal extends Fragment {
         navPerfil = view.findViewById(R.id.navPerfil);
         navSoporte = view.findViewById(R.id.navSoporte);
 
-        // Cambiar texto saludo dinámicamente (ejemplo)
-        String nombreUsuario = "Carlos"; // Cambia por el nombre real
+        // Leer nombre de usuario desde SharedPreferences
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        String nombreUsuario = prefs.getString("nombre_usuario", "Usuario");
+
         txtSaludo.setText("¡Hola, " + nombreUsuario + "!");
 
         etBuscar.addTextChangedListener(new TextWatcher() {
@@ -47,8 +54,9 @@ public class PantallaPrincipal extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence query, int start, int before, int count) {
-                Toast.makeText(getContext(), "Buscar: " + query, Toast.LENGTH_SHORT).show();
-                // Aquí podrías filtrar tu lista o abrir un fragmento de búsqueda
+                if (fragmentoMisIncidencias != null) {
+                    fragmentoMisIncidencias.filtrarReportes(query.toString(), "", "");
+                }
             }
 
             @Override
@@ -59,11 +67,12 @@ public class PantallaPrincipal extends Fragment {
                 Toast.makeText(getContext(), "Notificaciones (por implementar)", Toast.LENGTH_SHORT).show()
         );
 
-        navIncidencias.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new FragmentoMisIncidencias())
-                        .commit()
-        );
+        navIncidencias.setOnClickListener(v -> {
+            fragmentoMisIncidencias = new FragmentoMisIncidencias();
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragmentoMisIncidencias)
+                    .commit();
+        });
 
         navPerfil.setOnClickListener(v ->
                 requireActivity().getSupportFragmentManager().beginTransaction()
