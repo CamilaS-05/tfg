@@ -15,12 +15,11 @@ import java.util.List;
 
 public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignadoAdapter.ViewHolder> {
 
-    private List<ReporteDTO> listaOriginal;    // Lista completa sin filtrar
-    private List<ReporteDTO> listaReportes;    // Lista filtrada que mostramos
+    private List<ReporteDTO> listaOriginal;
+    private List<ReporteDTO> listaReportes;
     private Context context;
     private ReporteApi reporteApi;
 
-    // Constructor con lista original y contexto
     public ReporteAsignadoAdapter(List<ReporteDTO> listaReportes, Context context, ReporteApi reporteApi) {
         this.listaOriginal = new ArrayList<>();
         if (listaReportes != null) {
@@ -31,18 +30,6 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
         this.reporteApi = reporteApi;
     }
 
-    // Actualiza la lista completa (sin filtrar)
-    public void setListaOriginal(List<ReporteDTO> listaReportes) {
-        if (listaReportes == null) {
-            this.listaOriginal = new ArrayList<>();
-        } else {
-            this.listaOriginal = new ArrayList<>(listaReportes);
-        }
-        this.listaReportes = new ArrayList<>(this.listaOriginal);
-        notifyDataSetChanged();
-    }
-
-    // Actualiza sólo la lista filtrada que se muestra
     public void actualizarLista(List<ReporteDTO> listaFiltrada) {
         if (listaFiltrada == null) {
             this.listaReportes = new ArrayList<>();
@@ -50,23 +37,6 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
             this.listaReportes = listaFiltrada;
         }
         notifyDataSetChanged();
-    }
-
-    // Método para filtrar localmente por asunto, estado, fecha, etc.
-    public void filtrar(String asunto, String estado, String fecha) {
-        List<ReporteDTO> filtrados = new ArrayList<>();
-
-        for (ReporteDTO r : listaOriginal) {
-            boolean cumpleAsunto = asunto == null || asunto.isEmpty() || r.getAsunto().toLowerCase().contains(asunto.toLowerCase());
-            boolean cumpleEstado = estado == null || estado.isEmpty() || r.getEstado().toLowerCase().contains(estado.toLowerCase());
-            boolean cumpleFecha = fecha == null || fecha.isEmpty() || r.getFecha().toLowerCase().contains(fecha.toLowerCase());
-
-            if (cumpleAsunto && cumpleEstado && cumpleFecha) {
-                filtrados.add(r);
-            }
-        }
-
-        actualizarLista(filtrados);
     }
 
     @NonNull
@@ -85,10 +55,9 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
         holder.textViewEstado.setText("Estado: " + reporte.getEstado());
         holder.textViewFecha.setText("Fecha: " + reporte.getFecha());
 
-        // Listener para abrir detalle de reporte
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ReporteAsignadoActivity.class);
-            intent.putExtra("id_reporte", reporte.getId()); // Enviamos ID del reporte
+            intent.putExtra("id_reporte", reporte.getId());
             context.startActivity(intent);
         });
     }

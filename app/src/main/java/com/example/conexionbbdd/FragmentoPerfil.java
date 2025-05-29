@@ -14,25 +14,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentoPerfil extends Fragment {
 
     EditText etNombre, etTelefono, etCorreo, etNuevaContrasena, etRepetirContrasena;
     Button btnCambiarContrasena;
-    Connection con;
-    private String contrasenaActual;
 
     public FragmentoPerfil() {
-        Conexion c = new Conexion();
-        con = c.connect();
+        // Constructor vacío
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmento_perfil, container, false);
 
         etNombre = view.findViewById(R.id.et_nombre_usuario);
@@ -44,78 +42,47 @@ public class FragmentoPerfil extends Fragment {
 
         cargarDatosUsuario();
 
-        btnCambiarContrasena.setOnClickListener(v -> cambiarContrasena());
+        btnCambiarContrasena.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Funcionalidad cambiar contraseña pendiente", Toast.LENGTH_SHORT).show();
+        });
 
         return view;
     }
 
     private void cargarDatosUsuario() {
-        try {
-            SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", getActivity().MODE_PRIVATE);
-            String usuario = prefs.getString("nombre_usuario", null);
+        SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", getActivity().MODE_PRIVATE);
+        String usuario = prefs.getString("nombre_usuario", null);
 
-            if (usuario == null || con == null) {
-                Toast.makeText(getContext(), "Error cargando datos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM Usuarios WHERE usuario = ?");
-            pst.setString(1, usuario);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                etNombre.setText(rs.getString("nombrecompleto"));
-                etTelefono.setText(rs.getString("telefono"));
-                etCorreo.setText(rs.getString("correo"));
-                contrasenaActual = rs.getString("contrasena"); // Guardar contraseña actual
-            }
-
-        } catch (Exception e) {
-            Log.e("CARGA_USUARIO_ERROR", e.getMessage());
-        }
-    }
-
-    private void cambiarContrasena() {
-        String nuevaPass = etNuevaContrasena.getText().toString().trim();
-        String repetirPass = etRepetirContrasena.getText().toString().trim();
-
-        if (nuevaPass.isEmpty() || repetirPass.isEmpty()) {
-            Toast.makeText(getContext(), "Ambos campos de contraseña son obligatorios", Toast.LENGTH_SHORT).show();
+        if (usuario == null) {
+            Toast.makeText(getContext(), "Usuario no encontrado en preferencias", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!nuevaPass.equals(repetirPass)) {
-            Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        UsuarioApi usuarioApi = RetrofitClient.getRetrofitInstance().create(UsuarioApi.class);
 
-        if (nuevaPass.equals(contrasenaActual)) {
-            Toast.makeText(getContext(), "La nueva contraseña debe ser diferente a la actual", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // Aquí cambiamos la llamada a la nueva función del endpoint buscar/{usuario}
+        Call<Usuario> call = usuarioApi.getUsuarioPorNombre(usuario);
 
-        try {
-            SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", getActivity().MODE_PRIVATE);
-            String usuario = prefs.getString("nombre_usuario", null);
+        call.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Usuario usuarioDatos = response.body();
 
-            if (usuario == null || con == null) return;
+                    etNombre.setText(usuarioDatos.getNombreCompleto());
+                    etTelefono.setText(usuarioDatos.getTelefono());
+                    etCorreo.setText(usuarioDatos.getCorreo());
 
-            PreparedStatement pst = con.prepareStatement("UPDATE Usuarios SET contrasena = ? WHERE usuario = ?");
-            pst.setString(1, nuevaPass);
-            pst.setString(2, usuario);
-            int filas = pst.executeUpdate();
-
-            if (filas > 0) {
-                Toast.makeText(getContext(), "Contraseña actualizada", Toast.LENGTH_SHORT).show();
-                etNuevaContrasena.setText("");
-                etRepetirContrasena.setText("");
-                contrasenaActual = nuevaPass;
-            } else {
-                Toast.makeText(getContext(), "No se pudo actualizar", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error cargando datos del usuario", Toast.LENGTH_SHORT).show();
+                }
             }
 
-        } catch (Exception e) {
-            Log.e("CAMBIO_PASS_ERROR", e.getMessage());
-        }
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.e("API_ERROR", t.getMessage());
+                Toast.makeText(getContext(), "Error conectando con el servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

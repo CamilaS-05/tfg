@@ -111,7 +111,7 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
                     builder.setPositiveButton("Asignar", (dialog, which) -> {
                         Usuario usuarioSeleccionado = (Usuario) spinnerUsuarios.getSelectedItem();
                         if (usuarioSeleccionado != null) {
-                            asignarUsuarioAReporte(reporte, usuarioSeleccionado.getId(), position, usuarioSeleccionado.getNombrecompleto());
+                            asignarUsuarioAReporte(reporte, usuarioSeleccionado.getId(), position, usuarioSeleccionado.getNombreCompleto());
                         } else {
                             Toast.makeText(context, "No se seleccionó ningún usuario", Toast.LENGTH_SHORT).show();
                         }
