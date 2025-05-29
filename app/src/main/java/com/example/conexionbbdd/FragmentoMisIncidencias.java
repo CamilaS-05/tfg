@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,16 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentoMisIncidencias extends Fragment {
-
     private RecyclerView recyclerView;
     private ReporteApi reporteApi;
-
-    private ReporteAsignadoAdapter adapter;      // Guardamos referencia para filtrar
-    private List<ReporteDTO> listaOriginal;      // Lista completa para filtrar
-
-    public FragmentoMisIncidencias() {
-        // Constructor vacío obligatorio
-    }
+    private ReporteAsignadoAdapter adapter;
+    private List<ReporteDTO> listaOriginal;
+    ImageButton btnVolver;
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -40,10 +37,28 @@ public class FragmentoMisIncidencias extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        btnVolver = view.findViewById(R.id.btn_volver);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         reporteApi = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
 
         cargarReportesAsignados();
+
+        // Configura el listener para refrescar
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            cargarReportesAsignados();
+        });
+        btnVolver.setOnClickListener(v -> {
+            // Acción para volver al fragmento anterior o pantalla principal
+            if (getActivity() != null) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, new PantallaPrincipal())
+                        .commit();
+            }
+        });
+
 
         return view;
     }
@@ -60,6 +75,7 @@ public class FragmentoMisIncidencias extends Fragment {
 
         if (idUsuarioLong == -1) {
             Toast.makeText(getContext(), "Error: usuario no identificado", Toast.LENGTH_SHORT).show();
+            swipeRefreshLayout.setRefreshing(false); // Parar el indicador si estaba activo
             return;
         }
 
@@ -68,8 +84,9 @@ public class FragmentoMisIncidencias extends Fragment {
         reporteApi.getReportesAsignados(idUsuarioActual).enqueue(new Callback<List<ReporteDTO>>() {
             @Override
             public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
+                swipeRefreshLayout.setRefreshing(false); // Parar animación refresco
                 if (response.isSuccessful() && response.body() != null) {
-                    listaOriginal = response.body();  // Guardamos la lista completa
+                    listaOriginal = response.body();
                     adapter = new ReporteAsignadoAdapter(listaOriginal, getContext(), reporteApi);
                     recyclerView.setAdapter(adapter);
                 } else {
@@ -79,6 +96,7 @@ public class FragmentoMisIncidencias extends Fragment {
 
             @Override
             public void onFailure(Call<List<ReporteDTO>> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false); // Parar animación refresco
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
