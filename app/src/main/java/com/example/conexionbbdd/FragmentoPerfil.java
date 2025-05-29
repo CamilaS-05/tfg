@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class FragmentoPerfil extends Fragment {
 
     EditText etNombre, etTelefono, etCorreo, etNuevaContrasena, etRepetirContrasena;
     Button btnCambiarContrasena;
+    ImageButton btnVolver;
 
     public FragmentoPerfil() {
         // Constructor vacío
@@ -39,11 +41,22 @@ public class FragmentoPerfil extends Fragment {
         etNuevaContrasena = view.findViewById(R.id.et_nueva_contrasena_usuario);
         etRepetirContrasena = view.findViewById(R.id.et_repetir_contrasena_usuario);
         btnCambiarContrasena = view.findViewById(R.id.btn_cambiar_contrasena_usuario);
+        btnVolver = view.findViewById(R.id.btn_volver);
 
         cargarDatosUsuario();
 
         btnCambiarContrasena.setOnClickListener(v -> {
             Toast.makeText(getContext(), "Funcionalidad cambiar contraseña pendiente", Toast.LENGTH_SHORT).show();
+        });
+
+        btnVolver.setOnClickListener(v -> {
+            // Acción para volver al fragmento anterior o pantalla principal
+            if (getActivity() != null) {
+                 getActivity().getSupportFragmentManager()
+                      .beginTransaction()
+                      .replace(R.id.content_frame, new PantallaPrincipal())
+                      .commit();
+            }
         });
 
         return view;
@@ -60,7 +73,7 @@ public class FragmentoPerfil extends Fragment {
 
         UsuarioApi usuarioApi = RetrofitClient.getRetrofitInstance().create(UsuarioApi.class);
 
-        // Aquí cambiamos la llamada a la nueva función del endpoint buscar/{usuario}
+        // Llamada al endpoint buscar/{usuario}
         Call<Usuario> call = usuarioApi.getUsuarioPorNombre(usuario);
 
         call.enqueue(new Callback<Usuario>() {

@@ -17,6 +17,17 @@
         android:clipToPadding="false"
         android:backgroundTint="#FFFFFF">
 
+
+        <ImageButton
+            android:id="@+id/btn_volver"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Volver"
+            android:padding="4dp"
+            android:src="@drawable/ic_arrow_back" />
+
         <ImageView
             android:id="@+id/imageViewAdmin"
             android:layout_width="120dp"
