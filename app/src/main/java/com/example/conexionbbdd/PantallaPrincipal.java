@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ public class PantallaPrincipal extends Fragment {
 
     private LinearLayout navIncidencias, navPerfil, navSoporte;
 
+    private ImageButton btnMenu;  // botón para abrir drawer
+
     // Referencia al fragmento para llamar a filtrar
     private FragmentoMisIncidencias fragmentoMisIncidencias;
 
@@ -34,6 +37,7 @@ public class PantallaPrincipal extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pantalla_principal, container, false);
 
+      //  btnMenu = view.findViewById(R.id.btnMenu);
         etBuscar = view.findViewById(R.id.etBuscar);
         iconoNotificaciones = view.findViewById(R.id.iconoNotificaciones);
         txtSaludo = view.findViewById(R.id.txtSaludo);
@@ -46,7 +50,14 @@ public class PantallaPrincipal extends Fragment {
         SharedPreferences prefs = requireActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         String nombreUsuario = prefs.getString("nombre_usuario", "Usuario");
 
-        txtSaludo.setText("¡Hola, " + nombreUsuario + "!");
+        txtSaludo.setText("Área de trabajo de " + nombreUsuario );
+
+        // Click para abrir el drawer desde el activity
+//        btnMenu.setOnClickListener(v -> {
+//            if (getActivity() instanceof MainActivity) {
+//                ((MainActivity) getActivity()).abrirDrawer();
+//            }
+//        });
 
         etBuscar.addTextChangedListener(new TextWatcher() {
             @Override

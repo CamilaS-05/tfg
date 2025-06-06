@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
 
-
         // Configurar el nombre en el encabezado del NavigationView
         View headerView = navigationView.getHeaderView(0);
         textoBienvenida = headerView.findViewById(R.id.txtNombreUsuario);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, new PantallaPrincipal())
                             .commit();
-                }else if (id == R.id.nav_profile) {
+                } else if (id == R.id.nav_profile) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, new FragmentoPerfil())
                             .commit();
@@ -84,33 +84,35 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, new FragmentoConfig())
                             .commit();
-                }else if (id == R.id.nav_incis) {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_frame, new FragmentoMisIncidencias())
-                                .commit();
-
+                } else if (id == R.id.nav_incis) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, new FragmentoMisIncidencias())
+                            .commit();
                 } else if (id == R.id.nav_logout) {
                     // Limpiar SharedPreferences para cerrar sesión
                     SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.clear();  // Elimina todas las preferencias
+                    editor.clear();
                     editor.apply();
 
-                    // Mostrar mensaje de cierre de sesión
                     Toast.makeText(MainActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
 
-                    // Redirigir al usuario al login (InicioUsuarios)
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
 
-                    // Opcionalmente, puedes terminar esta actividad si no deseas que se pueda regresar a ella con el botón de retroceso
-                    finish();  // Esto es opcional, ya que al hacer startActivity() ya cambiarás a otra actividad
+                    finish();
                 }
 
                 drawerLayout.closeDrawers();
                 return true;
             }
-
         });
+    }
+
+    // Método público para abrir drawer desde fragmentos
+    public void abrirDrawer() {
+        if (drawerLayout != null) {
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }
