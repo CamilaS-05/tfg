@@ -2,12 +2,15 @@ package com.example.conexionbbdd;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UsuarioApi {
 
@@ -30,6 +33,11 @@ public interface UsuarioApi {
             @Field("usuario") String usuario,
             @Field("contrasena") String contrasena,
             @Field("origen_app") String origenApp
+    );
+    @DELETE("api/usuarios/{id}")
+    Call<ResponseBody> eliminarUsuario(
+            @Path("id") Long id,
+            @Query("origenApp") String origenApp
     );
 
     @GET("/api/usuarios/buscar/{usuario}")

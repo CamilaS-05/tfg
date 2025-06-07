@@ -1,5 +1,9 @@
 package com.example.conexionbbdd;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Arrays;
 import java.util.List;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class FragmentoConfig extends Fragment {
     ImageButton btnVolver;
@@ -54,8 +67,17 @@ public class FragmentoConfig extends Fragment {
                     // abrir ajustes de apariencia
                     break;
                 case 3:
-                    // confirmar y eliminar cuenta
+                    // Mostrar diálogo para confirmar eliminación
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Confirmar eliminación")
+                            .setMessage("¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")
+                            .setPositiveButton("Eliminar", (dialog, which) -> {
+                                eliminarCuenta();
+                            })
+                            .setNegativeButton("Cancelar", null)
+                            .show();
                     break;
+
             }
         });
 
@@ -86,4 +108,40 @@ public class FragmentoConfig extends Fragment {
 
         return view;
     }
+
+    private void eliminarCuenta() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        Long idUsuario = prefs.getLong("id_usuario", -1);
+
+        if (idUsuario == -1) {
+            Toast.makeText(getActivity(), "Error: usuario no identificado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+// Llamada Retrofit para eliminar usuario
+        UsuarioApi api = RetrofitClient.getRetrofitInstance().create(UsuarioApi.class);
+        Call<ResponseBody> call = api.eliminarUsuario(idUsuario, "incidencias");
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Cuenta eliminada correctamente", Toast.LENGTH_SHORT).show();
+                    // Redirigir a LoginActivity y cerrar la actual
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getActivity(), "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error en la conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
 }
+}
+
+

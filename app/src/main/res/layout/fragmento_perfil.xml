@@ -5,9 +5,18 @@
     android:padding="16dp">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2"
+        android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#FFFFFF"
         android:elevation="4dp"
         android:padding="24dp"
@@ -15,20 +24,8 @@
         android:clipToPadding="false"
         android:backgroundTint="#FFFFFF">
 
-        <!-- Flecha volver en esquina superior izquierda -->
-        <ImageButton
-            android:id="@+id/btn_volver"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Volver"
-            android:padding="4dp"
-            android:src="@drawable/ic_arrow_back"
-            android:layout_gravity="start" />
 
-        <!-- Imagen centrada horizontalmente -->
+    <!-- Imagen centrada horizontalmente -->
         <ImageView
             android:id="@+id/imageViewAdmin"
             android:layout_width="120dp"
@@ -99,6 +96,7 @@
         <TextView android:text="Nueva Contraseña"
             android:textColor="#555"
             android:layout_marginTop="24dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -106,6 +104,7 @@
             android:hint="Escribe nueva contraseña"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
+            android:visibility="gone"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -114,6 +113,7 @@
             android:text="Repetir Contraseña"
             android:textColor="#555"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -123,7 +123,8 @@
             android:padding="12dp"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <!-- Botón -->
         <Button
@@ -133,7 +134,14 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#3F51B5" />
+            android:backgroundTint="#3F51B5"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
