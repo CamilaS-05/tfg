@@ -15,6 +15,11 @@ public interface NotificacionApi {
             @Query("tipoDestino") String tipoDestino
     );
 
+    @GET("notificacion/usuario")
+    Call<List<Notificacion>> getNotificacionesPorUsuario(
+            @Query("id_usuario") int idUsuario,
+            @Query("tipoDestino") String tipoDestino
+    );
     @GET("/api/notificacion/admin")
     Call<List<Notificacion>> obtenerNotificacionesAdmin(
             @Query("tipoDestino") String tipoDestino

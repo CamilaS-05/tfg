@@ -138,7 +138,6 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
 
         // Actualizamos la UI inmediatamente
         reporte.setNombreAsignado(nombreCompleto);
-        reporte.setEstado("en progreso");
         notifyItemChanged(position);
 
         Call<String> call = api.asignarUsuario(reporte.getId(), idUsuario);

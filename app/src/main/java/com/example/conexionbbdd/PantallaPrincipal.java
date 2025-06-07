@@ -1,6 +1,7 @@
 package com.example.conexionbbdd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -74,26 +75,34 @@ public class PantallaPrincipal extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
-        iconoNotificaciones.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Notificaciones (por implementar)", Toast.LENGTH_SHORT).show()
-        );
+        iconoNotificaciones = view.findViewById(R.id.iconoNotificaciones);
+
+        iconoNotificaciones.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, new FragmentoNotificaciones())
+                    .addToBackStack(null)  // opcional, para permitir volver atrás
+                    .commit();
+        });
 
         navIncidencias.setOnClickListener(v -> {
             fragmentoMisIncidencias = new FragmentoMisIncidencias();
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragmentoMisIncidencias)
+                    .addToBackStack(null)  // opcional, para permitir volver atrás
                     .commit();
         });
 
         navPerfil.setOnClickListener(v ->
                 requireActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentoPerfil())
+                        .addToBackStack(null)  // opcional, para permitir volver atrás
                         .commit()
         );
 
         navSoporte.setOnClickListener(v ->
                 requireActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentoConfig())
+                        .addToBackStack(null)  // opcional, para permitir volver atrás
                         .commit()
         );
 
