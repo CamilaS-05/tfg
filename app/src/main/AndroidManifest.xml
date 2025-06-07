@@ -42,6 +42,8 @@
             android:exported="true" />
         <activity
             android:name=".ReporteAsignadoActivity" />
+        <activity
+            android:name=".EditarPerfilActivity" />
     </application>
 
 </manifest>

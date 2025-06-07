@@ -58,8 +58,11 @@ public class FragmentoConfig extends Fragment {
         adapter = new ConfigAdapter(lista, position -> {
             switch (position) {
                 case 0:
-                    // abrir pantalla de perfil
+                    // Abrir pantalla de edición de perfil
+                    Intent intent = new Intent(getContext(), EditarPerfilActivity.class);
+                    startActivity(intent);
                     break;
+
                 case 1:
                     // abrir configuración de notificaciones
                     break;
