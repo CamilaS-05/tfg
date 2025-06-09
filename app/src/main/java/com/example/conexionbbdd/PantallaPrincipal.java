@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,17 +115,39 @@ public class PantallaPrincipal extends Fragment {
             @Override
             public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    List<ReporteDTO> filtrados = new ArrayList<>();
+
+                    for (ReporteDTO reporte : response.body()) {
+                        String estado = reporte.getEstado();
+
+                        // Depuración: mostrar el estado recibido
+                        Log.d("ESTADO_REPORTE", "Estado: [" + estado + "]");
+
+                        if (estado != null) {
+                            String estadoNormalizado = estado.trim().toLowerCase();
+                            if (estadoNormalizado.equals("pendiente") || estadoNormalizado.equals("en proceso")) {
+                                filtrados.add(reporte);
+                            }
+                        }
+                    }
+
+                    // Depuración: cuántos reportes cumplen el filtro
+                    Log.d("API_DEBUG", "Total reportes filtrados: " + filtrados.size());
+
                     listaReportes.clear();
-                    listaReportes.addAll(response.body());
+                    listaReportes.addAll(filtrados);  // filtrados ya solo tiene pendientes y en proceso
                     adapter.setListaCompleta(listaReportes);
                     adapter.notifyDataSetChanged();
+                } else {
+                    Log.e("API_DEBUG", "Respuesta vacía o no exitosa");
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReporteDTO>> call, Throwable t) {
-                t.printStackTrace();
+                Log.e("API_DEBUG", "Error al obtener reportes asignados", t);
             }
         });
     }
+
 }

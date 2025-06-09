@@ -15,42 +15,52 @@ import java.util.List;
 
 public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignadoAdapter.ViewHolder> {
 
-    private List<ReporteDTO> listaOriginal;
-    private List<ReporteDTO> listaReportes;
+    private List<ReporteDTO> listaOriginal;   // Lista completa (sin filtrar)
+    private List<ReporteDTO> listaReportes;   // Lista visible (filtrada)
     private Context context;
     private ReporteApi reporteApi;
 
     public ReporteAsignadoAdapter(List<ReporteDTO> listaReportes, Context context, ReporteApi reporteApi) {
         this.listaOriginal = new ArrayList<>();
+        this.listaReportes = new ArrayList<>();
         if (listaReportes != null) {
             this.listaOriginal.addAll(listaReportes);
+            this.listaReportes.addAll(listaReportes);
         }
-        this.listaReportes = listaReportes != null ? listaReportes : new ArrayList<>();
         this.context = context;
         this.reporteApi = reporteApi;
     }
+
     public void filtrar(String texto) {
+        String textoLower = texto.toLowerCase();
         List<ReporteDTO> filtrados = new ArrayList<>();
         for (ReporteDTO r : listaOriginal) {
-            if (r.getAsunto().toLowerCase().contains(texto.toLowerCase()) ||
-                    r.getDescripcion().toLowerCase().contains(texto.toLowerCase())) {
+            String asunto = r.getAsunto() != null ? r.getAsunto().toLowerCase() : "";
+            String descripcion = r.getDescripcion() != null ? r.getDescripcion().toLowerCase() : "";
+
+            if (asunto.contains(textoLower) || descripcion.contains(textoLower)) {
                 filtrados.add(r);
             }
         }
         actualizarLista(filtrados);
     }
+
     public void setListaCompleta(List<ReporteDTO> nuevaLista) {
         this.listaOriginal.clear();
-        this.listaOriginal.addAll(nuevaLista);
         this.listaReportes.clear();
-        this.listaReportes.addAll(nuevaLista);
+
+        if (nuevaLista != null) {
+            this.listaOriginal.addAll(nuevaLista);
+            this.listaReportes.addAll(nuevaLista);
+        }
+
+        notifyDataSetChanged();
     }
 
     public void actualizarLista(List<ReporteDTO> listaFiltrada) {
-        if (listaFiltrada == null) {
-            this.listaReportes = new ArrayList<>();
-        } else {
-            this.listaReportes = listaFiltrada;
+        this.listaReportes.clear();
+        if (listaFiltrada != null) {
+            this.listaReportes.addAll(listaFiltrada);
         }
         notifyDataSetChanged();
     }
