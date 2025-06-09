@@ -136,22 +136,25 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         // Guardamos nombre anterior en caso de error
         String nombreAnterior = reporte.getNombreAsignado();
 
-        // Actualizamos la UI inmediatamente
-        reporte.setNombreAsignado(nombreCompleto);
+// Mostramos "Asignando..." temporalmente
+        reporte.setNombreAsignado("Asignando...");
         notifyItemChanged(position);
 
+// Llamada a la API
         Call<String> call = api.asignarUsuario(reporte.getId(), idUsuario);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
+                    // Ahora sí actualizamos el nombre real
+                    reporte.setNombreAsignado(nombreCompleto);
+                    notifyItemChanged(position);
                     Toast.makeText(context, "Usuario asignado correctamente", Toast.LENGTH_SHORT).show();
-
                     if (listener != null) {
                         listener.onUsuarioAsignado();
                     }
                 } else {
-                    // Revertimos los cambios
+                    // Revertimos
                     reporte.setNombreAsignado(nombreAnterior);
                     notifyItemChanged(position);
                     Toast.makeText(context, "Error al asignar usuario", Toast.LENGTH_SHORT).show();
@@ -167,7 +170,7 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         });
     }
 
-    static class ReporteViewHolder extends RecyclerView.ViewHolder {
+        static class ReporteViewHolder extends RecyclerView.ViewHolder {
         TextView txtAsunto, txtEstado, txtFecha, txtAsignado;
         Button btnAsignar;
 

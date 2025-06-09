@@ -10,6 +10,11 @@ public class Usuario {
 
     @SerializedName("nombreCompleto") // Cambiado para que coincida con el backend
     private String nombreCompleto;
+    @Override
+    public String toString() {
+        return nombreCompleto;
+    }
+
 
     @SerializedName("telefono")
     private String telefono;
