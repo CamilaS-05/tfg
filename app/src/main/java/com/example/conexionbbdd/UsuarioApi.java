@@ -43,8 +43,12 @@ public interface UsuarioApi {
     );
 
 
-    @PUT("/api/usuarios/{id}")
-    Call<String> actualizarUsuario(@Path("id") Long id, @Body UsuarioEditar usuarioEditar);
+    @PUT("api/usuarios/{id}")
+    Call<ResponseBody> actualizarUsuario(
+            @Path("id") long id,
+            @Body UsuarioEditar usuarioEditar
+    );
+
 
     @GET("api/usuarios/{id}")
     Call<Usuario> getUsuarioPorId(@Path("id") Long id);

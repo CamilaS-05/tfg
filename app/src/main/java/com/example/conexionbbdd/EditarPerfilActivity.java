@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -145,29 +146,29 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         UsuarioEditar usuarioEditar = new UsuarioEditar(
                 idUsuario,
-                nombreActualizar,
-                correoActualizar,
-                telefonoActualizar,
-                usuarioActualizar,
-                contrasenaActualizar,
+                nombreActualizar != null ? nombreActualizar : nombreOriginal,
+                correoActualizar != null ? correoActualizar : correoOriginal,
+                telefonoActualizar != null ? telefonoActualizar : telefonoOriginal,
+                usuarioActualizar != null ? usuarioActualizar : usuarioOriginal,
+                contrasenaActualizar, // solo la mandas si fue modificada
                 "incidencias"
         );
 
-        Call<String> call = api.actualizarUsuario(idUsuario, usuarioEditar);
-        call.enqueue(new Callback<String>() {
+
+        Call<ResponseBody> call = api.actualizarUsuario(idUsuario, usuarioEditar);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(EditarPerfilActivity.this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Toast.makeText(EditarPerfilActivity.this, "Usuario actualizado correctamente", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(EditarPerfilActivity.this, "Error al actualizar perfil", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfilActivity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(EditarPerfilActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(EditarPerfilActivity.this, "Fallo de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
