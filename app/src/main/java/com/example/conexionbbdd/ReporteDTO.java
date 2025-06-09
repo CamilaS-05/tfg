@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class ReporteDTO {
     private int id;
-    private int idUsuario;
+    private long idUsuario;
     private String asunto;
     private String descripcion;
     private String nombreAsignado;
@@ -17,8 +17,8 @@ public class ReporteDTO {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public long getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(long idUsuario) { this.idUsuario = idUsuario; }
 
     public String getAsunto() { return asunto; }
     public void setAsunto(String asunto) { this.asunto = asunto; }

@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 
 public class FragmentoConfig extends Fragment {
-    ImageButton btnVolver;
+
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     ConfigAdapter adapter;
@@ -46,7 +46,6 @@ public class FragmentoConfig extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        btnVolver = view.findViewById(R.id.btn_volver);
 
         lista = Arrays.asList(
                 new OpcionConfig("Perfil", R.drawable.persona),
@@ -86,14 +85,6 @@ public class FragmentoConfig extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        btnVolver.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_frame, new PantallaPrincipal())
-                        .commit();
-            }
-        });
 
         // Configurar SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(() -> {

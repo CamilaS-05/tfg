@@ -4,19 +4,6 @@
     android:background="#F3E8FF"
     android:fitsSystemWindows="true">
 
-    <!-- Icono hamburguesa menú en esquina superior izquierda -->
-<!--    <ImageButton-->
-<!--        android:id="@+id/btnMenu"-->
-<!--        android:layout_width="36dp"-->
-<!--        android:layout_height="36dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--        android:contentDescription="Abrir menú"-->
-<!--        android:src="@drawable/ic_menu" /> &lt;!&ndash; Asegúrate que tienes un drawable llamado ic_menu (las tres rayitas) &ndash;&gt;-->
-
     <!-- Campana de notificaciones arriba derecha -->
     <ImageView
         android:id="@+id/iconoNotificaciones"
@@ -67,20 +54,33 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
+    <!-- RecyclerView para mostrar lista filtrada -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerReportes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etBuscar"
+        android:layout_above="@id/bottomBar"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"/>
 
-        <!-- Barra inferior de navegación -->
-        <LinearLayout
-            android:id="@+id/bottomBar"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginVertical="35dp"
-            android:background="#D1C4E9"
-            android:gravity="center"
-            android:weightSum="3"
-            android:layout_marginBottom="16dp">
 
+    <!-- Barra inferior de navegación -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginVertical="35dp"
+        android:background="#D1C4E9"
+        android:gravity="center"
+        android:weightSum="3"
+        android:layout_marginBottom="16dp">
 
         <LinearLayout
             android:id="@+id/navIncidencias"
@@ -142,6 +142,4 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
-    </RelativeLayout>
-
-
+</RelativeLayout>

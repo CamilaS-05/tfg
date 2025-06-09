@@ -29,6 +29,22 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
         this.context = context;
         this.reporteApi = reporteApi;
     }
+    public void filtrar(String texto) {
+        List<ReporteDTO> filtrados = new ArrayList<>();
+        for (ReporteDTO r : listaOriginal) {
+            if (r.getAsunto().toLowerCase().contains(texto.toLowerCase()) ||
+                    r.getDescripcion().toLowerCase().contains(texto.toLowerCase())) {
+                filtrados.add(r);
+            }
+        }
+        actualizarLista(filtrados);
+    }
+    public void setListaCompleta(List<ReporteDTO> nuevaLista) {
+        this.listaOriginal.clear();
+        this.listaOriginal.addAll(nuevaLista);
+        this.listaReportes.clear();
+        this.listaReportes.addAll(nuevaLista);
+    }
 
     public void actualizarLista(List<ReporteDTO> listaFiltrada) {
         if (listaFiltrada == null) {
