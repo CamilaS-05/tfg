@@ -2,38 +2,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp"
+    android:background="#FAFAFA">
 
+    <!-- Contenedor de filtros con fondo y sombra -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_rounded_shadow"
+        android:padding="12dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="12dp">
 
         <Spinner
             android:id="@+id/spinner_filtro_estado"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6200EE"
+            android:popupBackground="#FFFFFF"
+            android:spinnerMode="dropdown"
+            android:padding="8dp"/>
 
         <Spinner
             android:id="@+id/spinner_orden_fecha"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="12dp"
+            android:backgroundTint="#6200EE"
+            android:popupBackground="#FFFFFF"
+            android:spinnerMode="dropdown"
+            android:padding="8dp"/>
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_reportes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
