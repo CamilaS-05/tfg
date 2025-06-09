@@ -21,6 +21,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private Long idUsuario;
     private UsuarioApi api;
 
+    // Variables para guardar datos originales del usuario
+    private String nombreOriginal, correoOriginal, telefonoOriginal, usuarioOriginal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,6 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         api = RetrofitClient.getRetrofitInstance().create(UsuarioApi.class);
 
-        // Llamamos a backend para obtener datos actuales y cargar como hint
         cargarDatosUsuarioDesdeApi();
 
         btnGuardar.setOnClickListener(v -> {
@@ -63,13 +65,26 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Usuario usuario = response.body();
 
-                    // Setear hints con datos actuales
-                    etNombreCompleto.setHint(usuario.getNombreCompleto());
-                    etCorreo.setHint(usuario.getCorreo());
-                    etTelefono.setHint(usuario.getTelefono());
-                    etUsuario.setHint(usuario.getUsuario());
+                    // Guardar datos originales
+                    nombreOriginal = usuario.getNombreCompleto();
+                    correoOriginal = usuario.getCorreo();
+                    telefonoOriginal = usuario.getTelefono();
+                    usuarioOriginal = usuario.getUsuario();
 
-                    // Contraseñas siempre vacías y hint genérico
+                    // Mostrar como hints o textos en campos
+                    etNombreCompleto.setHint(nombreOriginal);
+                    etCorreo.setHint(correoOriginal);
+                    etTelefono.setHint(telefonoOriginal);
+                    etUsuario.setHint(usuarioOriginal);
+
+                    // Opcional: también puedes ponerlos como texto, para que sea editable directamente:
+                    // etNombreCompleto.setText(nombreOriginal);
+                    // etCorreo.setText(correoOriginal);
+                    // etTelefono.setText(telefonoOriginal);
+                    // etUsuario.setText(usuarioOriginal);
+
+                    etContrasena.setText("");
+                    etConfirmarContrasena.setText("");
                     etContrasena.setHint("Contraseña");
                     etConfirmarContrasena.setHint("Confirmar contraseña");
                 } else {
@@ -92,15 +107,16 @@ public class EditarPerfilActivity extends AppCompatActivity {
         String contrasena = etContrasena.getText().toString();
         String confirmar = etConfirmarContrasena.getText().toString();
 
-        if (TextUtils.isEmpty(nombre) && etNombreCompleto.getHint() == null) {
+        // Revisa que al menos tengamos datos originales o editados para estos campos obligatorios
+        if (TextUtils.isEmpty(nombre) && (nombreOriginal == null || nombreOriginal.isEmpty())) {
             Toast.makeText(this, "Nombre es obligatorio", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(correo) && etCorreo.getHint() == null) {
+        if (TextUtils.isEmpty(correo) && (correoOriginal == null || correoOriginal.isEmpty())) {
             Toast.makeText(this, "Correo es obligatorio", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(usuario) && etUsuario.getHint() == null) {
+        if (TextUtils.isEmpty(usuario) && (usuarioOriginal == null || usuarioOriginal.isEmpty())) {
             Toast.makeText(this, "Usuario es obligatorio", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -116,30 +132,28 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     private void actualizarUsuario() {
         String nombre = etNombreCompleto.getText().toString().trim();
-        if (nombre.isEmpty()) nombre = etNombreCompleto.getHint().toString();
-
         String correo = etCorreo.getText().toString().trim();
-        if (correo.isEmpty()) correo = etCorreo.getHint().toString();
-
         String telefono = etTelefono.getText().toString().trim();
-        if (telefono.isEmpty()) telefono = etTelefono.getHint() != null ? etTelefono.getHint().toString() : "";
-
         String usuario = etUsuario.getText().toString().trim();
-        if (usuario.isEmpty()) usuario = etUsuario.getHint().toString();
-
         String contrasena = etContrasena.getText().toString();
+
+        String nombreActualizar = nombre.isEmpty() || nombre.equals(nombreOriginal) ? null : nombre;
+        String correoActualizar = correo.isEmpty() || correo.equals(correoOriginal) ? null : correo;
+        String telefonoActualizar = telefono.isEmpty() || telefono.equals(telefonoOriginal) ? null : telefono;
+        String usuarioActualizar = usuario.isEmpty() || usuario.equals(usuarioOriginal) ? null : usuario;
+        String contrasenaActualizar = contrasena.isEmpty() ? null : contrasena;
 
         UsuarioEditar usuarioEditar = new UsuarioEditar(
                 idUsuario,
-                nombre,
-                correo,
-                telefono,
-                usuario,
-                contrasena.isEmpty() ? null : contrasena,
+                nombreActualizar,
+                correoActualizar,
+                telefonoActualizar,
+                usuarioActualizar,
+                contrasenaActualizar,
                 "incidencias"
         );
 
-        Call<String> call = api.actualizarUsuario(usuarioEditar);
+        Call<String> call = api.actualizarUsuario(idUsuario, usuarioEditar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

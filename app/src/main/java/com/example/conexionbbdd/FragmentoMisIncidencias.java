@@ -26,7 +26,7 @@ public class FragmentoMisIncidencias extends Fragment {
     private ReporteApi reporteApi;
     private ReporteAsignadoAdapter adapter;
     private List<ReporteDTO> listaOriginal;
-    ImageButton btnVolver;
+
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
@@ -37,7 +37,7 @@ public class FragmentoMisIncidencias extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        btnVolver = view.findViewById(R.id.btn_volver);
+
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
@@ -49,16 +49,6 @@ public class FragmentoMisIncidencias extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(() -> {
             cargarReportesAsignados();
         });
-        btnVolver.setOnClickListener(v -> {
-            // Acción para volver al fragmento anterior o pantalla principal
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_frame, new PantallaPrincipal())
-                        .commit();
-            }
-        });
-
 
         return view;
     }

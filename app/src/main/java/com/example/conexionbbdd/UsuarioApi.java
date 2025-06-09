@@ -42,8 +42,9 @@ public interface UsuarioApi {
             @Query("origenApp") String origenApp
     );
 
-    @PUT("api/usuarios/actualizar")
-    Call<String> actualizarUsuario(@Body UsuarioEditar usuarioEditar);
+
+    @PUT("/api/usuarios/{id}")
+    Call<String> actualizarUsuario(@Path("id") Long id, @Body UsuarioEditar usuarioEditar);
 
     @GET("api/usuarios/{id}")
     Call<Usuario> getUsuarioPorId(@Path("id") Long id);

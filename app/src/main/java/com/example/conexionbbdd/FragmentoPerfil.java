@@ -23,7 +23,6 @@ public class FragmentoPerfil extends Fragment {
 
     EditText etNombre, etTelefono, etCorreo, etNuevaContrasena, etRepetirContrasena;
     Button btnCambiarContrasena;
-    ImageButton btnVolver;
 
     public FragmentoPerfil() {
         // Constructor vacío
@@ -41,22 +40,12 @@ public class FragmentoPerfil extends Fragment {
         etNuevaContrasena = view.findViewById(R.id.et_nueva_contrasena_usuario);
         etRepetirContrasena = view.findViewById(R.id.et_repetir_contrasena_usuario);
         btnCambiarContrasena = view.findViewById(R.id.btn_cambiar_contrasena_usuario);
-        btnVolver = view.findViewById(R.id.btn_volver);
+
 
         cargarDatosUsuario();
 
         btnCambiarContrasena.setOnClickListener(v -> {
             Toast.makeText(getContext(), "Funcionalidad cambiar contraseña pendiente", Toast.LENGTH_SHORT).show();
-        });
-
-        btnVolver.setOnClickListener(v -> {
-            // Acción para volver al fragmento anterior o pantalla principal
-            if (getActivity() != null) {
-                 getActivity().getSupportFragmentManager()
-                      .beginTransaction()
-                      .replace(R.id.content_frame, new PantallaPrincipal())
-                      .commit();
-            }
         });
 
         return view;
