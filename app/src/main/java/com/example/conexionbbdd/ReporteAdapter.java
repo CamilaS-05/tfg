@@ -42,7 +42,20 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         this.lista = lista;
     }
 
+    // Actualiza la lista y ordena de más reciente a más antiguo
     public void updateData(List<ReporteDTO> nuevosReportes) {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        nuevosReportes.sort((r1, r2) -> {
+            try {
+                Date fecha1 = isoFormat.parse(r1.getFecha());
+                Date fecha2 = isoFormat.parse(r2.getFecha());
+                // Orden descendente: más reciente primero
+                return fecha2.compareTo(fecha1);
+            } catch (Exception e) {
+                return 0;
+            }
+        });
+
         this.lista = nuevosReportes;
         notifyDataSetChanged();
     }
@@ -79,6 +92,22 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         } catch (Exception e) {
             return fechaISO;
         }
+    }
+
+    // Método para ordenar por fecha ascendente o descendente
+    public void ordenarPorFecha(boolean descendente) {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
+        lista.sort((r1, r2) -> {
+            try {
+                Date f1 = isoFormat.parse(r1.getFecha());
+                Date f2 = isoFormat.parse(r2.getFecha());
+                return descendente ? f2.compareTo(f1) : f1.compareTo(f2);
+            } catch (Exception e) {
+                return 0;
+            }
+        });
+        notifyDataSetChanged();
     }
 
     private void mostrarDialogoAsignarUsuario(ReporteDTO reporte, int position) {
@@ -136,17 +165,17 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         // Guardamos nombre anterior en caso de error
         String nombreAnterior = reporte.getNombreAsignado();
 
-// Mostramos "Asignando..." temporalmente
+        // Mostramos "Asignando..." temporalmente
         reporte.setNombreAsignado("Asignando...");
         notifyItemChanged(position);
 
-// Llamada a la API
+        // Llamada a la API para asignar
         Call<String> call = api.asignarUsuario(reporte.getId(), idUsuario);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    // Ahora sí actualizamos el nombre real
+                    // Actualizamos el nombre real
                     reporte.setNombreAsignado(nombreCompleto);
                     notifyItemChanged(position);
                     Toast.makeText(context, "Usuario asignado correctamente", Toast.LENGTH_SHORT).show();
@@ -154,7 +183,7 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
                         listener.onUsuarioAsignado();
                     }
                 } else {
-                    // Revertimos
+                    // Revertimos el nombre anterior
                     reporte.setNombreAsignado(nombreAnterior);
                     notifyItemChanged(position);
                     Toast.makeText(context, "Error al asignar usuario", Toast.LENGTH_SHORT).show();
@@ -170,11 +199,11 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         });
     }
 
-        static class ReporteViewHolder extends RecyclerView.ViewHolder {
+    static class ReporteViewHolder extends RecyclerView.ViewHolder {
         TextView txtAsunto, txtEstado, txtFecha, txtAsignado;
         Button btnAsignar;
 
-        ReporteViewHolder(View itemView) {
+        public ReporteViewHolder(@NonNull View itemView) {
             super(itemView);
             txtAsunto = itemView.findViewById(R.id.txtAsunto);
             txtEstado = itemView.findViewById(R.id.txtEstado);

@@ -21,19 +21,22 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FragmentoReportesAdmin extends Fragment {
 
     private RecyclerView recyclerReportes;
-    private Spinner spinnerFiltro;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private ReporteAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private Spinner spinnerFiltro, spinnerOrdenFecha;
+    private boolean ordenDescendente = true;
 
-    public FragmentoReportesAdmin() {}
+    private ReporteApi reporteApi; // Asumo que tienes tu servicio API configurado
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        reporteApi = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
         return inflater.inflate(R.layout.fragment_reportes_admin, container, false);
     }
 
@@ -42,18 +45,24 @@ public class FragmentoReportesAdmin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerReportes = view.findViewById(R.id.recycler_reportes);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         spinnerFiltro = view.findViewById(R.id.spinner_filtro_estado);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+        spinnerOrdenFecha = view.findViewById(R.id.spinner_orden_fecha);
 
         recyclerReportes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
+        // Inicializar ApiService (retrofit)
+        ReporteApi apiService = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
+
+
+        // Configurar spinner filtro estado
+        ArrayAdapter<CharSequence> filtroAdapter = ArrayAdapter.createFromResource(
                 getContext(),
-                R.array.estados_filtro_array,
+                R.array.estado_array,  // por ejemplo: ["Todos", "Pendiente", "En progreso", "Completado"]
                 android.R.layout.simple_spinner_item
         );
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFiltro.setAdapter(spinnerAdapter);
+        filtroAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFiltro.setAdapter(filtroAdapter);
 
         spinnerFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -66,55 +75,76 @@ public class FragmentoReportesAdmin extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        // Configurar spinner orden fecha
+        ArrayAdapter<CharSequence> ordenAdapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.orden_fecha_array,  // ["Más recientes", "Más antiguos"]
+                android.R.layout.simple_spinner_item
+        );
+        ordenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOrdenFecha.setAdapter(ordenAdapter);
+
+        spinnerOrdenFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ordenDescendente = (position == 0); // Más recientes = true
+                if (adapter != null) {
+                    adapter.ordenarPorFecha(ordenDescendente);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        // Configurar SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(() -> {
             String estadoSeleccionado = (String) spinnerFiltro.getSelectedItem();
             if (estadoSeleccionado == null) estadoSeleccionado = "Todos";
             cargarReportesFiltrados(estadoSeleccionado);
         });
 
-        cargarReportesFiltrados("Todos");
+        // Carga inicial con "Todos" y orden descendente
+        spinnerFiltro.setSelection(0); // "Todos"
+        spinnerOrdenFecha.setSelection(0); // "Más recientes"
     }
 
     private void cargarReportesFiltrados(String estado) {
-        if (estado == null) estado = "Todos";
+        swipeRefreshLayout.setRefreshing(true);
 
-        ReporteApi api = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
         Call<List<ReporteDTO>> call;
-
         if (estado.equals("Todos")) {
-            call = api.listarReportesDTO();
+            call = reporteApi.listarReportesDTO();
         } else {
-            call = api.listarReportesDTOPorEstado(estado.toLowerCase());
+            call = reporteApi.listarReportesDTOPorEstado(estado.toLowerCase());
         }
 
         call.enqueue(new Callback<List<ReporteDTO>>() {
             @Override
             public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
-                swipeRefreshLayout.setRefreshing(false); // ✅ Parar animación
+                swipeRefreshLayout.setRefreshing(false);
 
                 if (response.isSuccessful() && response.body() != null) {
+                    List<ReporteDTO> reportes = response.body();
+
                     if (adapter == null) {
-                        adapter = new ReporteAdapter(getContext(), response.body());
+                        adapter = new ReporteAdapter(getContext(), reportes);
                         recyclerReportes.setAdapter(adapter);
-
-                        adapter.setOnUsuarioAsignadoListener(() -> {
-                            String filtroActual = (String) spinnerFiltro.getSelectedItem();
-                            if (filtroActual == null) filtroActual = "Todos";
-                            cargarReportesFiltrados(filtroActual);
-                        });
-
                     } else {
-                        adapter.updateData(response.body());
+                        adapter.updateData(reportes);
                     }
+
+                    // Aplicar orden seleccionado
+                    adapter.ordenarPorFecha(ordenDescendente);
                 } else {
-                    Toast.makeText(getContext(), "Error al cargar reportes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No se pudo cargar la lista", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReporteDTO>> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false); // ✅ Parar animación
-                Toast.makeText(getContext(), "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getContext(), "Error al conectar: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
