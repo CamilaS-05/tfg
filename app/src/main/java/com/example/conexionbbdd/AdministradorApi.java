@@ -3,9 +3,14 @@ package com.example.conexionbbdd;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface AdministradorApi {
+
+    @GET("api/administradores/usuario/{usuarioadmin}")
+    Call<Administrador> getAdministradorByUsuario(@Path("usuarioadmin") String usuarioadmin);
 
     @POST("/api/administradores/login")
     @FormUrlEncoded

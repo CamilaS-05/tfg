@@ -82,45 +82,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Contraseña -->
-        <TextView android:text="Nueva Contraseña"
-            android:textColor="#555"
-            android:layout_marginTop="24dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_nueva_contrasena_admin"
-            android:hint="Escribe nueva contraseña"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <!-- Repetir Contraseña -->
-        <TextView
-            android:text="Repetir Contraseña"
-            android:textColor="#555"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_repetir_contrasena_admin"
-            android:hint="Repite la contraseña"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <!-- Botón -->
-        <Button
-            android:id="@+id/btn_cambiar_contrasena_admin"
-            android:text="Cambiar Contraseña"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#3F51B5" />
     </LinearLayout>
 </ScrollView>

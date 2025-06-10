@@ -18,7 +18,7 @@ public class PantallaPrincipalAdmin extends Fragment {
 
     private ImageView iconoNotificaciones;
     private TextView txtSaludoAdmin, txtPanelSubtitle;
-    private LinearLayout navHomeAdmin, navUsersAdmin, navPerfilAdmin, navSettingsAdmin;
+    private LinearLayout navUsersAdmin, navPerfilAdmin, navSettingsAdmin;
     private MaterialCardView btnGestionUsuarios, btnVerReportes;
 
     public PantallaPrincipalAdmin() {}
@@ -36,7 +36,6 @@ public class PantallaPrincipalAdmin extends Fragment {
         btnGestionUsuarios = view.findViewById(R.id.btnGestionUsuarios);
         btnVerReportes = view.findViewById(R.id.btnVerReportes);
 
-        navHomeAdmin = view.findViewById(R.id.navHomeAdmin);
         navUsersAdmin = view.findViewById(R.id.navUsersAdmin);
         navPerfilAdmin = view.findViewById(R.id.navPerfilAdmin);
         navSettingsAdmin = view.findViewById(R.id.navSettingsAdmin);
@@ -76,11 +75,6 @@ public class PantallaPrincipalAdmin extends Fragment {
                     .replace(R.id.content_frame, new FragmentoReportesAdmin()) // Apunta a FragmentoReportesAdmin
                     .addToBackStack(null)
                     .commit();
-        });
-
-        // Navegación inferior
-        navHomeAdmin.setOnClickListener(v -> {
-            // Ya estamos en home
         });
 
         // Este botón de la barra inferior sigue llevando a FragmentoUsuariosAdmin para ver usuarios

@@ -88,7 +88,7 @@ public class LoginAdminActivity extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("nombre_admin", loginResponse.getUsuario());
-                        editor.putLong("id_admin", loginResponse.getId()); // ← ESTA LÍNEA
+                        editor.putLong("id_admin", loginResponse.getId());
                         editor.apply();
 
 
