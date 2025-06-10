@@ -7,7 +7,15 @@
     <color name="azul">#8ED9D1</color>
     <color name="azulClaro">#939EFF</color>
     <color name="amarillento">#60EBB2</color>
-
+    <color name="colorPrimary">#673AB7</color>   <!-- Púrpura oscuro -->
+    <color name="colorPrimaryDark">#512DA8</color> <!-- Más oscuro -->
+    <color name="colorAccent">#FFC107</color>     <!-- Amarillo vibrante para acentos -->
+    <color name="colorSecondary">#03DAC5</color>  <!-- Teal para otros acentos -->
+    <color name="backgroundLight">#F8F8F8</color> <!-- Fondo claro -->
+    <color name="textDark">#212121</color>        <!-- Texto oscuro -->
+    <color name="textMedium">#616161</color>      <!-- Texto gris medio -->
+    <color name="cardBackground">#FFFFFF</color>   <!-- Fondo de tarjeta blanco -->
+    <color name="strokeColor">#E0E0E0</color>    <!-- Borde de tarjeta gris claro -->
 
 
 </resources>

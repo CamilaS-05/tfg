@@ -1,20 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaPrincipalAdmin"
-    android:background="@color/amarillento">
+    android:background="#F8F8F8"
+    android:fitsSystemWindows="true"
+    tools:context=".PantallaPrincipalAdmin">
+
+    <!-- Header y Saludo -->
+    <TextView
+    android:id="@+id/txtSaludoAdmin"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="16dp"
+    android:text="¡Hola, Administrador!"
+    android:textColor="@android:color/black"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toStartOf="@+id/iconoNotificacionesAdmin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:text="ADMINISTRADOR \n INCIDENCIAS"
-        android:textSize="24sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"
+    android:id="@+id/txtPanelSubtitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="16dp"
+    android:text="Panel de Administración"
+    android:textColor="#616161"
+    android:textSize="16sp"
+    app:layout_constraintEnd_toStartOf="@+id/iconoNotificacionesAdmin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txtSaludoAdmin" />
+
+        <!-- Icono de notificaciones -->
+    <ImageView
+    android:id="@+id/iconoNotificacionesAdmin"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="24dp"
+    android:src="@drawable/ic_notificaciones"
+    android:contentDescription="Notificaciones"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Sección de Estadísticas Rápidas -->
+    <TextView
+    android:id="@+id/tituloEstadisticas"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="32dp"
+    android:text="Resumen Rápido"
+    android:textColor="@android:color/black"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txtPanelSubtitle" />
+
+    <LinearLayout
+    android:id="@+id/statsContainer"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tituloEstadisticas">
+
+    <!-- Tarjeta Usuarios -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:strokeColor="#E0E0E0"
+        app:strokeWidth="1dp">
+
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_usuarios"
+            app:tint="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/txtTotalUsuarios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuarios"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
+<!-- Tarjeta Reportes -->
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="0dp"
+    android:layout_height="120dp"
+    android:layout_weight="1"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/baseline_warning_24"
+            app:tint="@color/colorAccent" /> <!-- Asumiendo colorAccent existe -->
+        <TextView
+            android:id="@+id/txtReportesPendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendientes"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
+<!-- Tarjeta Notificaciones -->
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="0dp"
+    android:layout_height="120dp"
+    android:layout_weight="1"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_notificaciones"
+            app:tint="@color/colorSecondary" /> <!-- Asumiendo colorSecondary existe -->
+        <TextView
+            android:id="@+id/txtNotificaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alertas"
+            android:textSize="12sp"
+            android:textColor="#616161" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
+
+    <!-- Sección de Acciones Rápidas -->
+<TextView
+android:id="@+id/tituloAcciones"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="24dp"
+android:layout_marginTop="32dp"
+android:text="Acciones Rápidas"
+android:textColor="@android:color/black"
+android:textSize="20sp"
+android:textStyle="bold"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/statsContainer" />
+
+<LinearLayout
+android:id="@+id/quickActions"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="16dp"
+android:layout_marginTop="16dp"
+android:layout_marginEnd="16dp"
+android:orientation="horizontal"
+android:weightSum="2"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
+
+<!-- Botón Gestionar Usuarios -->
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/btnGestionUsuarios"
+    android:layout_width="0dp"
+    android:layout_height="120dp"
+    android:layout_weight="1"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_usuarios"
+            app:tint="@color/colorPrimaryDark" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Gestionar Usuarios"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
+<!-- Botón Ver Reportes -->
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/btnVerReportes"
+    android:layout_width="0dp"
+    android:layout_height="120dp"
+    android:layout_weight="1"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/baseline_warning_24"
+            app:tint="@color/colorAccent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Ver Reportes"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
+
+    <!-- Barra inferior de navegación -->
+    <LinearLayout
+    android:id="@+id/bottomBarAdmin"
+    android:layout_width="0dp"
+    android:layout_height="60dp"
+    android:layout_marginBottom="0dp"
+    android:background="@drawable/bottom_nav_background"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="4"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <LinearLayout
+    android:id="@+id/navHomeAdmin"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundBorderless"> <!-- Efecto de pulsación -->
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/baseline_home_24"
+/> <!-- Color vibrante para el icono activo -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="300dp"/>
+        android:text="Inicio"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    </LinearLayout>
 
+    <LinearLayout
+    android:id="@+id/navUsersAdmin"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundBorderless">
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_usuarios" /> <!-- Gris para iconos inactivos -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuarios"
+        android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+    android:id="@+id/navReportsAdmin"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundBorderless">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/baseline_warning_24" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reportes"
+        android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+    android:id="@+id/navSettingsAdmin"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundBorderless">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/baseline_settings_24" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajustes"
+        android:textSize="12sp" />
+    </LinearLayout>
+        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
