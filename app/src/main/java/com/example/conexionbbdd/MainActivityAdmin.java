@@ -81,10 +81,10 @@ public class MainActivityAdmin extends AppCompatActivity {
                         .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
                         .commit();
 
-            } else if (savedInstanceState == null) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new FragmentoUsuariosAdmin()) // Asegúrate de que 'fragment_container' exista en tu activity_main.xml
-                            .commit();
+            } else if (id == R.id.nav_usuarios_admin) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoUsuariosAdmin())
+                        .commit();
 
             } else if (id == R.id.nav_settings_admin) {
                 getSupportFragmentManager().beginTransaction()

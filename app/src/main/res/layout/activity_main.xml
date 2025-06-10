@@ -43,8 +43,6 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextColor="@android:color/white"
-        app:itemIconTint="@android:color/white"
         app:menu="@menu/menu_navigation"
         app:headerLayout="@layout/cabecero_menu"/>
 

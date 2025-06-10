@@ -68,11 +68,9 @@ public class PantallaPrincipalAdmin extends Fragment {
                     .commit();
         });
 
-        // "Ver Reportes" también va a FragmentoReportesAdmin, lo que significa
-        // que ambos botones ahora mostrarán la lista de reportes para asignación.
         btnVerReportes.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new FragmentoReportesAdmin()) // Apunta a FragmentoReportesAdmin
+                    .replace(R.id.content_frame, new FragmentoVerReportes()) // Fragmento para reportes sin asignar
                     .addToBackStack(null)
                     .commit();
         });

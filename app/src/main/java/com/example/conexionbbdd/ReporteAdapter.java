@@ -27,6 +27,7 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
     private List<ReporteDTO> lista;
     private Context context;
 
+    private boolean mostrarBotonAsignar;
     public interface OnUsuarioAsignadoListener {
         void onUsuarioAsignado();
     }
@@ -37,9 +38,10 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         this.listener = listener;
     }
 
-    public ReporteAdapter(Context context, List<ReporteDTO> lista) {
+    public ReporteAdapter(Context context, List<ReporteDTO> lista, boolean mostrarBotonAsignar) {
         this.context = context;
         this.lista = lista;
+        this.mostrarBotonAsignar = mostrarBotonAsignar;
     }
 
     // Actualiza la lista y ordena de más reciente a más antiguo
@@ -66,7 +68,6 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reporte, parent, false);
         return new ReporteViewHolder(vista);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ReporteViewHolder holder, int position) {
         ReporteDTO reporte = lista.get(position);
@@ -75,8 +76,17 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
         holder.txtEstado.setText("Estado: " + reporte.getEstado());
         holder.txtFecha.setText("Fecha: " + formatoFecha(reporte.getFecha()));
         holder.txtAsignado.setText("Asignado a: " + (nombre != null && !nombre.isEmpty() ? nombre : "Asignando..."));
-        holder.btnAsignar.setOnClickListener(v -> mostrarDialogoAsignarUsuario(reporte, position));
+
+        // Mostrar u ocultar botón según flag
+        if (mostrarBotonAsignar) {
+            holder.btnAsignar.setVisibility(View.VISIBLE);
+            holder.btnAsignar.setOnClickListener(v -> mostrarDialogoAsignarUsuario(reporte, position));
+        } else {
+            holder.btnAsignar.setVisibility(View.GONE);
+            holder.btnAsignar.setOnClickListener(null);
+        }
     }
+
 
     @Override
     public int getItemCount() {

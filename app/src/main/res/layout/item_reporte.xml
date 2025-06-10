@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
     android:layout_margin="8dp"
@@ -12,7 +13,8 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background">
 
         <TextView
             android:id="@+id/txtAsunto"
@@ -50,21 +52,20 @@
             android:textColor="#444444"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAsignar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Asignar"
+            android:text="Asignar Reporte"
             android:layout_marginTop="12dp"
-            android:backgroundTint="#6200EE"
-            android:textColor="#FFFFFF"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:elevation="4dp"
-            android:fontFamily="sans-serif-medium" />
+            android:backgroundTint="#B0BEC5"
+            android:textColor="#263238"
+            app:cornerRadius="12dp"
+            app:strokeColor="#90A4AE"
+            app:strokeWidth="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:elevation="4dp" />
+
 
     </LinearLayout>
 

@@ -96,7 +96,7 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
 
 <!-- Botón Gestionar Usuarios -->
 <com.google.android.material.card.MaterialCardView
-    android:id="@+id/btnGestionUsuarios"
+    android:id="@+id/btnVerReportes"
     android:layout_width="0dp"
     android:layout_height="120dp"
     android:layout_weight="1"
@@ -116,12 +116,12 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_usuarios" />
+            android:src="@drawable/baseline_warning_24" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Gestionar Usuarios"
+            android:text="Ver Reportes"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textColor="@android:color/black" />
@@ -130,7 +130,7 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
 
 <!-- Botón Ver Reportes -->
 <com.google.android.material.card.MaterialCardView
-    android:id="@+id/btnVerReportes"
+    android:id="@+id/btnGestionUsuarios"
     android:layout_width="0dp"
     android:layout_height="120dp"
     android:layout_weight="1"
@@ -149,12 +149,12 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/baseline_warning_24"/>
+            android:src="@drawable/ic_usuarios"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ver Reportes"
+            android:text="Gestionar Usuarios"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textColor="@android:color/black" />

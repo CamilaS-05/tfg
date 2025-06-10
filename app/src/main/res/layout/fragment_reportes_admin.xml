@@ -5,6 +5,34 @@
     android:padding="16dp"
     android:background="#FAFAFA">
 
+    <!-- Título arriba -->
+    <TextView
+        android:id="@+id/tv_titulo_asignar_reporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ASIGNAR INCIDENCIAS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:fontFamily="@font/montserrat_regular"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+
+    <!-- EditText para filtro por texto -->
+    <EditText
+        android:id="@+id/et_buscar_texto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar reporte..."
+        android:padding="12dp"
+        android:background="@drawable/bg_rounded_shadow"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="8dp"
+        android:inputType="text"
+        android:layout_marginBottom="12dp"
+        android:elevation="4dp"/>
+
     <!-- Contenedor de filtros con fondo y sombra -->
     <LinearLayout
         android:layout_width="match_parent"

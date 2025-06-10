@@ -6,10 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,25 +23,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentoReportesAdmin extends Fragment {
+public class FragmentoVerReportes extends Fragment {
 
     private RecyclerView recyclerReportes;
-    private ReporteAdapter adapter;
+    private ReporteSimpleAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private Spinner spinnerFiltro, spinnerOrdenFecha;
     private EditText etBuscarTexto;
 
-    private boolean ordenDescendente = true;
     private ReporteApi reporteApi;
 
     private List<ReporteDTO> listaCompletaReportes = new ArrayList<>();
-    private String filtroEstadoSeleccionado = "Todos";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         reporteApi = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
-        return inflater.inflate(R.layout.fragment_reportes_admin, container, false);
+        return inflater.inflate(R.layout.fragmento_ver_reportes, container, false);
     }
 
     @Override
@@ -53,61 +47,15 @@ public class FragmentoReportesAdmin extends Fragment {
 
         recyclerReportes = view.findViewById(R.id.recycler_reportes);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        spinnerFiltro = view.findViewById(R.id.spinner_filtro_estado);
-        spinnerOrdenFecha = view.findViewById(R.id.spinner_orden_fecha);
         etBuscarTexto = view.findViewById(R.id.et_buscar_texto);
 
         recyclerReportes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Configurar spinner filtro estado
-        ArrayAdapter<CharSequence> filtroAdapter = ArrayAdapter.createFromResource(
-                getContext(),
-                R.array.estado_array,
-                android.R.layout.simple_spinner_item
-        );
-        filtroAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFiltro.setAdapter(filtroAdapter);
+        swipeRefreshLayout.setOnRefreshListener(() -> cargarReportesSinAsignar());
 
-        spinnerFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filtroEstadoSeleccionado = (String) parent.getItemAtPosition(position);
-                cargarReportesFiltrados(filtroEstadoSeleccionado);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        // Configurar spinner orden fecha
-        ArrayAdapter<CharSequence> ordenAdapter = ArrayAdapter.createFromResource(
-                getContext(),
-                R.array.orden_fecha_array,
-                android.R.layout.simple_spinner_item
-        );
-        ordenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOrdenFecha.setAdapter(ordenAdapter);
-
-        spinnerOrdenFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ordenDescendente = (position == 0);
-                if (adapter != null) {
-                    adapter.ordenarPorFecha(ordenDescendente);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        // Configurar SwipeRefreshLayout
-        swipeRefreshLayout.setOnRefreshListener(() -> cargarReportesFiltrados(filtroEstadoSeleccionado));
-
-        // Listener para filtro texto
         etBuscarTexto.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -115,23 +63,17 @@ public class FragmentoReportesAdmin extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {}
         });
 
         // Carga inicial
-        spinnerFiltro.setSelection(0); // "Todos"
-        spinnerOrdenFecha.setSelection(0); // "Más recientes"
+        swipeRefreshLayout.setRefreshing(true);
+        cargarReportesSinAsignar();
     }
 
-    private void cargarReportesFiltrados(String estado) {
-        swipeRefreshLayout.setRefreshing(true);
-
-        Call<List<ReporteDTO>> call;
-        if (estado.equals("Todos")) {
-            call = reporteApi.listarReportesDTO();
-        } else {
-            call = reporteApi.listarReportesDTOPorEstado(estado.toLowerCase());
-        }
+    private void cargarReportesSinAsignar() {
+        Call<List<ReporteDTO>> call = reporteApi.listarReportesDTO();
+        // O usa el endpoint que filtre reportes sin usuario asignado (depende de tu API)
 
         call.enqueue(new Callback<List<ReporteDTO>>() {
             @Override
@@ -139,21 +81,24 @@ public class FragmentoReportesAdmin extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
 
                 if (response.isSuccessful() && response.body() != null) {
-                    listaCompletaReportes = response.body();
+                    // Filtrar solo los reportes con estado "Pendiente"
+                    List<ReporteDTO> pendientes = new ArrayList<>();
+                    for (ReporteDTO r : response.body()) {
+                        if ("Pendiente".equalsIgnoreCase(r.getEstado())) {
+                            pendientes.add(r);
+                        }
+                    }
+
+                    listaCompletaReportes = pendientes;
 
                     if (adapter == null) {
-                        adapter = new ReporteAdapter(getContext(), listaCompletaReportes, true);
+                        adapter = new ReporteSimpleAdapter(getContext(), listaCompletaReportes);
                         recyclerReportes.setAdapter(adapter);
                     } else {
                         adapter.updateData(listaCompletaReportes);
                     }
 
-                    // Aplico orden
-                    adapter.ordenarPorFecha(ordenDescendente);
-
-                    // Aplico filtro texto (por si hay texto ya escrito)
                     aplicarFiltroTexto(etBuscarTexto.getText().toString());
-
                 } else {
                     Toast.makeText(getContext(), "No se pudo cargar la lista", Toast.LENGTH_SHORT).show();
                 }
@@ -171,14 +116,12 @@ public class FragmentoReportesAdmin extends Fragment {
         if (adapter == null) return;
 
         if (texto.isEmpty()) {
-            // Sin filtro texto, muestra todos los reportes cargados
             adapter.updateData(listaCompletaReportes);
         } else {
             List<ReporteDTO> filtrados = new ArrayList<>();
             String textoLower = texto.toLowerCase();
 
             for (ReporteDTO reporte : listaCompletaReportes) {
-                // Filtra por título y descripción (modifica si quieres otros campos)
                 if ((reporte.getAsunto() != null && reporte.getAsunto().toLowerCase().contains(textoLower)) ||
                         (reporte.getDescripcion() != null && reporte.getDescripcion().toLowerCase().contains(textoLower))) {
                     filtrados.add(reporte);
@@ -186,7 +129,5 @@ public class FragmentoReportesAdmin extends Fragment {
             }
             adapter.updateData(filtrados);
         }
-
-        adapter.ordenarPorFecha(ordenDescendente);
     }
 }
