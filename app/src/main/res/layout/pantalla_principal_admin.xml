@@ -219,7 +219,7 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
     </LinearLayout>
 
     <LinearLayout
-    android:id="@+id/navReportsAdmin"
+    android:id="@+id/navPerfilAdmin"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -230,11 +230,11 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/baseline_warning_24" />
+        android:src="@drawable/persona" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reportes"
+        android:text="Mi perfil"
         android:textSize="12sp" />
     </LinearLayout>
 

@@ -17,8 +17,8 @@ import com.google.android.material.card.MaterialCardView;
 public class PantallaPrincipalAdmin extends Fragment {
 
     private ImageView iconoNotificaciones;
-    private TextView txtSaludoAdmin, txtTotalUsuarios, txtReportesPendientes, txtNotificaciones, txtPanelSubtitle;
-    private LinearLayout navHomeAdmin, navUsersAdmin, navReportsAdmin, navSettingsAdmin;
+    private TextView txtSaludoAdmin, txtPanelSubtitle;
+    private LinearLayout navHomeAdmin, navUsersAdmin, navPerfilAdmin, navSettingsAdmin;
     private MaterialCardView btnGestionUsuarios, btnVerReportes;
 
     public PantallaPrincipalAdmin() {}
@@ -38,7 +38,7 @@ public class PantallaPrincipalAdmin extends Fragment {
 
         navHomeAdmin = view.findViewById(R.id.navHomeAdmin);
         navUsersAdmin = view.findViewById(R.id.navUsersAdmin);
-        navReportsAdmin = view.findViewById(R.id.navReportsAdmin);
+        navPerfilAdmin = view.findViewById(R.id.navPerfilAdmin);
         navSettingsAdmin = view.findViewById(R.id.navSettingsAdmin);
 
         // Configurar saludo personalizado
@@ -92,9 +92,9 @@ public class PantallaPrincipalAdmin extends Fragment {
         });
 
         // Este botón de la barra inferior también apunta a FragmentoReportesAdmin
-        navReportsAdmin.setOnClickListener(v -> {
+        navPerfilAdmin.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new FragmentoReportesAdmin())
+                    .replace(R.id.content_frame, new FragmentoPerfilAdmin())
                     .addToBackStack(null)
                     .commit();
         });

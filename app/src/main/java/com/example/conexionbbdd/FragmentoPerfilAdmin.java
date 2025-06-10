@@ -26,8 +26,7 @@ public class FragmentoPerfilAdmin extends Fragment {
     private String contrasenaActual;
 
     public FragmentoPerfilAdmin() {
-        Conexion c = new Conexion();
-        con = c.connect();
+
     }
 
     @Nullable

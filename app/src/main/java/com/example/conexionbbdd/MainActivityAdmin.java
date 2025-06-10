@@ -80,10 +80,6 @@ public class MainActivityAdmin extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
                         .commit();
-            } else if (id == R.id.nav_reportes_admin) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new FragmentoReportesAdmin())
-                        .commit();
 
             } else if (savedInstanceState == null) {
                     getSupportFragmentManager().beginTransaction()
