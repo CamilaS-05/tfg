@@ -32,9 +32,6 @@ public class PantallaPrincipalAdmin extends Fragment {
         iconoNotificaciones = view.findViewById(R.id.iconoNotificacionesAdmin);
         txtSaludoAdmin = view.findViewById(R.id.txtSaludoAdmin);
         txtPanelSubtitle = view.findViewById(R.id.txtPanelSubtitle);
-        txtTotalUsuarios = view.findViewById(R.id.txtTotalUsuarios);
-        txtReportesPendientes = view.findViewById(R.id.txtReportesPendientes);
-        txtNotificaciones = view.findViewById(R.id.txtNotificaciones);
 
         btnGestionUsuarios = view.findViewById(R.id.btnGestionUsuarios);
         btnVerReportes = view.findViewById(R.id.btnVerReportes);
@@ -54,8 +51,7 @@ public class PantallaPrincipalAdmin extends Fragment {
         }
         txtPanelSubtitle.setText("Panel de Administración");
 
-        // Cargar estadísticas (deberías implementar esta lógica)
-        cargarEstadisticas();
+
 
         // Listeners
         iconoNotificaciones.setOnClickListener(v -> {
@@ -113,10 +109,4 @@ public class PantallaPrincipalAdmin extends Fragment {
         return view;
     }
 
-    private void cargarEstadisticas() {
-        // Lógica para cargar estadísticas
-        txtTotalUsuarios.setText("24");
-        txtReportesPendientes.setText("15");
-        txtNotificaciones.setText("3");
-    }
 }

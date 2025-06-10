@@ -50,19 +50,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Sección de Estadísticas Rápidas -->
-    <TextView
-    android:id="@+id/tituloEstadisticas"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginTop="32dp"
-    android:text="Resumen Rápido"
-    android:textColor="@android:color/black"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/txtPanelSubtitle" />
 
     <LinearLayout
     android:id="@+id/statsContainer"
@@ -75,129 +62,9 @@
     android:weightSum="3"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tituloEstadisticas">
+    app:layout_constraintTop_toBottomOf="@+id/iconoNotificacionesAdmin">
 
-    <!-- Tarjeta Usuarios -->
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_weight="1"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:strokeColor="#E0E0E0"
-        app:strokeWidth="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_usuarios"
-            app:tint="@color/colorPrimary" />
-        <TextView
-            android:id="@+id/txtTotalUsuarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Usuarios"
-            android:textSize="12sp"
-            android:textColor="#616161" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
-
-<!-- Tarjeta Reportes -->
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="0dp"
-    android:layout_height="120dp"
-    android:layout_weight="1"
-    android:layout_marginEnd="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="1dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/baseline_warning_24"
-            app:tint="@color/colorAccent" /> <!-- Asumiendo colorAccent existe -->
-        <TextView
-            android:id="@+id/txtReportesPendientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pendientes"
-            android:textSize="12sp"
-            android:textColor="#616161" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
-
-<!-- Tarjeta Notificaciones -->
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="0dp"
-    android:layout_height="120dp"
-    android:layout_weight="1"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="1dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_notificaciones"
-            app:tint="@color/colorSecondary" /> <!-- Asumiendo colorSecondary existe -->
-        <TextView
-            android:id="@+id/txtNotificaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alertas"
-            android:textSize="12sp"
-            android:textColor="#616161" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
 </LinearLayout>
 
     <!-- Sección de Acciones Rápidas -->
@@ -249,8 +116,7 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_usuarios"
-            app:tint="@color/colorPrimaryDark" />
+            android:src="@drawable/ic_usuarios" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -283,8 +149,7 @@ app:layout_constraintTop_toBottomOf="@+id/tituloAcciones">
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/baseline_warning_24"
-            app:tint="@color/colorAccent" />
+            android:src="@drawable/baseline_warning_24"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
