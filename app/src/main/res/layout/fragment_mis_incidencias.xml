@@ -2,37 +2,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@drawable/card_background">
 
-    <!-- Barra superior con botón volver y título alineados -->
+    <!-- Título y espacio -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
-
-
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/textTituloMisIncidencias"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
             android:text="Mis Incidencias Asignadas"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:visibility="invisible" />
-
+            android:textStyle="bold"
+            android:gravity="center" />
     </LinearLayout>
 
-    <!-- SwipeRefreshLayout envolviendo RecyclerView -->
+    <!-- SearchView -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:iconifiedByDefault="true"
+        android:queryHint="Buscar por asunto o estado"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/card_background"
+        android:hint="Buscar por Asunto, Estado o fecha"/>
+
+    <!-- SwipeRefresh + RecyclerView -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
@@ -44,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false" />
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

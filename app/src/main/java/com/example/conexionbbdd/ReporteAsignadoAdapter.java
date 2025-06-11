@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignadoAdapter.ViewHolder> {
@@ -79,13 +81,23 @@ public class ReporteAsignadoAdapter extends RecyclerView.Adapter<ReporteAsignado
         holder.textViewAsunto.setText(reporte.getAsunto());
         holder.textViewDescripcion.setText(reporte.getDescripcion());
         holder.textViewEstado.setText("Estado: " + reporte.getEstado());
-        holder.textViewFecha.setText("Fecha: " + reporte.getFecha());
+        holder.textViewFecha.setText(formatoFecha(reporte.getFecha()));
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ReporteAsignadoActivity.class);
             intent.putExtra("id_reporte", reporte.getId());
             context.startActivity(intent);
         });
+    }
+    private String formatoFecha(String fechaISO) {
+        try {
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date date = isoFormat.parse(fechaISO);
+            SimpleDateFormat formatoLocal = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return formatoLocal.format(date);
+        } catch (Exception e) {
+            return fechaISO;
+        }
     }
 
     @Override
