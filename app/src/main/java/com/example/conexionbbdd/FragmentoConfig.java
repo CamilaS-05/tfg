@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,7 +67,19 @@ public class FragmentoConfig extends Fragment {
                     // abrir configuración de notificaciones
                     break;
                 case 2:
-                    // abrir ajustes de apariencia
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Selecciona el tema")
+                            .setItems(new CharSequence[]{"Claro", "Oscuro"}, (dialog, which) -> {
+                                if (which == 0) {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                                    guardarTema("claro");
+                                } else {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                                    guardarTema("oscuro");
+                                }
+                            })
+                            .show();
+
                     break;
                 case 3:
                     // Mostrar diálogo para confirmar eliminación
@@ -86,6 +99,7 @@ public class FragmentoConfig extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+
         // Configurar SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(() -> {
             // Aquí iría la lógica para refrescar datos,
@@ -102,7 +116,13 @@ public class FragmentoConfig extends Fragment {
 
         return view;
     }
-
+    private void guardarTema(String tema) {
+        SharedPreferences.Editor editor = requireActivity()
+                .getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+                .edit();
+        editor.putString("tema_app", tema);
+        editor.apply();
+    }
     private void eliminarCuenta() {
         SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         Long idUsuario = prefs.getLong("id_usuario", -1);

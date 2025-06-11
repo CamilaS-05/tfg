@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="@color/verdeClaro"
     android:padding="16dp">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_margin="8dp"
         android:layout_gravity="center"
         android:clipToPadding="false"
-        android:backgroundTint="#FFFFFF">
+        android:backgroundTint="@color/blancoVerde">
 
         <ImageView
             android:id="@+id/imageViewAdmin"

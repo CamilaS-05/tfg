@@ -15,7 +15,11 @@
     <color name="textDark">#212121</color>        <!-- Texto oscuro -->
     <color name="textMedium">#616161</color>      <!-- Texto gris medio -->
     <color name="cardBackground">#FFFFFF</color>   <!-- Fondo de tarjeta blanco -->
-    <color name="strokeColor">#E0E0E0</color>    <!-- Borde de tarjeta gris claro -->
+    <color name="strokeColor">#E0E0E0</color>
+    <color name="verdeOscuro">#8AABA6</color>
+    <color name="verdeClaro">#D4E3E1</color>
+    <color name="blancoVerde">#EBF5F4</color>    <!-- Borde de tarjeta gris claro -->
+
 
 
 </resources>

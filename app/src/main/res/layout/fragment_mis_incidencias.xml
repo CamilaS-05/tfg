@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@drawable/card_background">
+    android:background="@color/verdeClaro">
 
     <!-- Título y espacio -->
     <LinearLayout

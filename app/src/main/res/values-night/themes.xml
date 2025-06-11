@@ -1,11 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ConexionBBDD" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Colores oscuros personalizados -->
+        <item name="colorPrimary">#90CAF9</item>
+        <item name="colorPrimaryVariant">#42A5F5</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="colorSecondary">#FFB74D</item>
+        <item name="colorOnSecondary">#000000</item>
+        <item name="android:windowBackground">#121212</item>
     </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here -->
     </style>
+
+
 </resources>

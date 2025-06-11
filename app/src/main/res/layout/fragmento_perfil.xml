@@ -1,16 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="@color/verdeClaro"
     android:padding="16dp">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F2F2F2"
-        android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +15,8 @@
         android:padding="24dp"
         android:layout_margin="8dp"
         android:clipToPadding="false"
-        android:backgroundTint="#FFFFFF">
+        android:backgroundTint="@color/blancoVerde"
+        android:layout_gravity="center_vertical">
 
 
     <!-- Imagen centrada horizontalmente -->
@@ -143,5 +137,4 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    </LinearLayout>
 </ScrollView>

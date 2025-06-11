@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/verdeClaro">
 
     <!-- Barra superior con botón volver y título alineados -->
     <LinearLayout
@@ -15,15 +16,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
-        <ImageButton
-            android:id="@+id/btn_volver"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="20dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Volver"
-            android:padding="2dp"
-            android:src="@drawable/ic_arrow_back" />
+
 
         <TextView
             android:id="@+id/textTituloMisIncidencias"
@@ -33,13 +26,10 @@
             android:gravity="center"
             android:text="CONFIGURACIÓN"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_semibold"/>
 
-        <!-- View invisible para equilibrar el espacio a la derecha -->
-        <View
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:visibility="invisible" />
+
     </LinearLayout>
 
     <!-- SwipeRefreshLayout envolviendo RecyclerView -->

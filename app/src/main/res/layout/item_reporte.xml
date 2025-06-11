@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Asignar Reporte"
             android:layout_marginTop="12dp"
-            android:backgroundTint="#B0BEC5"
+            android:backgroundTint="@color/verdeOscuro"
             android:textColor="#263238"
             app:cornerRadius="12dp"
             app:strokeColor="#90A4AE"

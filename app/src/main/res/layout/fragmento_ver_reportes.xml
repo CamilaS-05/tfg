@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@color/verdeClaro">
 
     <EditText
         android:id="@+id/et_buscar_texto"
@@ -13,7 +14,7 @@
         android:drawableStart="@android:drawable/ic_menu_search"
         android:padding="10dp"
         android:inputType="text"
-        android:background="@android:drawable/edit_text"
+        android:background="@color/blancoVerde"
         android:layout_marginBottom="8dp"
         />
 

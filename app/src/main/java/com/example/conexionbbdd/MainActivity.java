@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -48,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+        String tema = prefs.getString("tema_app", "claro");
+
+        if (tema.equals("oscuro")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         // Configurar el nombre en el encabezado del NavigationView
         View headerView = navigationView.getHeaderView(0);

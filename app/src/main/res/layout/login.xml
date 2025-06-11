@@ -35,7 +35,7 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textColorLink="#000000"
-                android:textSize="34sp"
+                android:textSize="25dp"
                 android:textStyle="bold">
 
             </TextView>
@@ -87,10 +87,10 @@
                 android:id="@+id/notienecuenta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿Aun no tienes una cuenta?"
+                android:text="¿Aún no tienes una cuenta?"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 />
@@ -103,7 +103,7 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textColorLink="#000000"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
 
@@ -116,7 +116,7 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textColorLink="#000000"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 />

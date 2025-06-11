@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    android:background="#FAFBFC"> <!-- Fondo muy suave -->
+    android:background="@color/verdeClaro"> <!-- Fondo muy suave -->
 
     <TextView
         android:id="@+id/textViewTitle"

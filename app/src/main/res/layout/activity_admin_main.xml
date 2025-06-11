@@ -16,10 +16,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSecondary"
+            android:background="@color/verdeOscuro"
             app:title="ADMINISTRADOR"
             app:titleTextColor="@android:color/white"
-            app:popupTheme="@style/ThemeOverlay.Material3.Light"/>
+            app:popupTheme="@style/ThemeOverlay.Material3.Light"
+            android:textAlignment="center"/>
 
         <!-- Contenido -->
         <FrameLayout
