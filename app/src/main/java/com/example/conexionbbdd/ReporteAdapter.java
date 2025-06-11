@@ -28,6 +28,10 @@ public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ReporteV
     private Context context;
 
     private boolean mostrarBotonAsignar;
+
+    public ReporteAdapter(List<ReporteDTO> listaReportes, Context context) {
+    }
+
     public interface OnUsuarioAsignadoListener {
         void onUsuarioAsignado();
     }

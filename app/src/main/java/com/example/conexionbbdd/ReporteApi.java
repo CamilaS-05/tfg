@@ -9,6 +9,8 @@ import retrofit2.http.Query;
 import java.util.List;
 
 public interface ReporteApi {
+    @GET("/api/reporte/reportes/ultimos")
+    Call<List<ReporteDTO>> getUltimosReportes();
 
     @PUT("/api/reporte/cambiarEstado")
     Call<String> cambiarEstado(
