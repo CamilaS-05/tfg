@@ -10,12 +10,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetalleReporte"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@android:color/white"
         android:padding="24dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="17dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,113 +23,117 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background">
 
-            <!-- Asunto centrado, fuente moderna -->
+            <!-- Ícono y asunto centrados -->
+            <ImageView
+                android:id="@+id/iconReporte"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_report_problem_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/txtAsunto"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"/>
+
             <TextView
                 android:id="@+id/txtAsunto"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="#263238"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iconReporte"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="32dp"
-                app:layout_constraintHorizontal_bias="0.5" />
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="8dp" />
 
-            <!-- Descripción con margen izquierda y derecha, color gris suave -->
+            <!-- Línea separadora -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/txtAsunto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="#546E7A"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="35dp"
                 app:layout_constraintTop_toBottomOf="@id/txtAsunto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Estado actual con margen izquierda y color distintivo -->
             <TextView
                 android:id="@+id/txtEstadoActual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#388E3C"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-medium"
+                android:textSize="18sp"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="35dp"
                 app:layout_constraintTop_toBottomOf="@id/txtDescripcion"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Fecha con margen izquierda y color gris -->
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#78909C"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
+                android:textSize="18sp"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="35dp"
                 app:layout_constraintTop_toBottomOf="@id/txtEstadoActual"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Texto "Cambiar estado" encima del Spinner -->
             <TextView
                 android:id="@+id/txtLabelSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cambiar estado"
                 android:textColor="#546E7A"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif-medium"
                 android:layout_marginTop="24dp"
-                android:layout_marginStart="35dp"
                 app:layout_constraintTop_toBottomOf="@id/txtFecha"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Spinner ancho con fondo y bordes redondeados -->
             <Spinner
                 android:id="@+id/spinnerNuevoEstado"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="35dp"
                 android:background="@drawable/bg_spinner_rounded"
-                android:popupBackground="@android:color/white"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 app:layout_constraintTop_toBottomOf="@id/txtLabelSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Botón centrado con bordes redondeados y sombra -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCambiarEstado"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginEnd="56dp"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#B0BEC5"
+                android:textColor="#263238"
+                app:cornerRadius="12dp"
                 android:text="Cambiar Estado"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
                 app:layout_constraintTop_toBottomOf="@id/spinnerNuevoEstado"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                android:foreground="?attr/selectableItemBackground" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

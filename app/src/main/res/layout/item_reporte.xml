@@ -7,7 +7,8 @@
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
     android:layout_margin="8dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    app:ignore="NamespaceTypo">
 
     <LinearLayout
         android:orientation="vertical"

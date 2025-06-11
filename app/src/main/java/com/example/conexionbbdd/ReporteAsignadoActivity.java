@@ -2,6 +2,7 @@ package com.example.conexionbbdd;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -62,7 +63,10 @@ public class ReporteAsignadoActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown); // Layout para dropdown
         spinnerNuevoEstado.setAdapter(adapter);
 
-        btnCambiarEstado.setOnClickListener(view -> cambiarEstado());
+        btnCambiarEstado.setOnClickListener(view -> {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_bounce));
+            cambiarEstado();
+        });
     }
 
     private void cargarDetalleReporte(int idReporte) {
