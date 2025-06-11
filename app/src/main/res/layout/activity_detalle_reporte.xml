@@ -80,5 +80,24 @@
             android:background="@drawable/edittext_background"
             android:textSize="16sp" />
 
+        <!-- Usuario creador -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Usuario creador"
+            android:textColor="#555"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/txtUsuarioReporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:padding="8dp"
+            android:background="@drawable/edittext_background"
+            android:textSize="16sp" />
+
     </LinearLayout>
 </ScrollView>

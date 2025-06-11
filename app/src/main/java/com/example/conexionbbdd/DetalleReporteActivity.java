@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetalleReporteActivity extends AppCompatActivity {
-    private TextView txtitulo, txtAsunto, txtDescripcion, txtFecha;
+    private TextView txtitulo, txtAsunto, txtDescripcion, txtFecha, txtUsuarioReporte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class DetalleReporteActivity extends AppCompatActivity {
         txtAsunto = findViewById(R.id.txtTituloReporte);
         txtDescripcion = findViewById(R.id.txtDescripcionReporte);
         txtFecha = findViewById(R.id.txtFechaReporte);
+        txtUsuarioReporte = findViewById(R.id.txtUsuarioReporte);
+
 
         int idReporte = getIntent().getIntExtra("reporte_id", -1);
 
@@ -50,17 +52,16 @@ public class DetalleReporteActivity extends AppCompatActivity {
 
     private void cargarDetalleReporte(int idReporte) {
         ReporteApi api = RetrofitClient.getRetrofitInstance().create(ReporteApi.class);
-        api.getReportePorId(idReporte).enqueue(new Callback<Reporte>() {
+        api.getReporteDtoPorId(idReporte).enqueue(new Callback<ReporteDTO>() {
             @Override
-            public void onResponse(Call<Reporte> call, Response<Reporte> response) {
+            public void onResponse(Call<ReporteDTO> call, Response<ReporteDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Reporte reporte = response.body();
-                   txtitulo.setText("REPORTE DETALLADO");
-                    txtAsunto.setText( reporte.getAsunto());
-                    txtDescripcion.setText( reporte.getDescripcion());
-                    txtFecha.setText(formatoFecha(reporte.getFechaCreacion()));
-
-
+                    ReporteDTO reporte = response.body();
+                    txtitulo.setText("REPORTE DETALLADO");
+                    txtAsunto.setText(reporte.getAsunto());
+                    txtDescripcion.setText(reporte.getDescripcion());
+                    txtFecha.setText(formatoFecha(reporte.getFecha()));
+                    txtUsuarioReporte.setText(reporte.getNombreUsuario());
                 } else {
                     Toast.makeText(DetalleReporteActivity.this, "Error al cargar el reporte", Toast.LENGTH_SHORT).show();
                     finish();
@@ -68,14 +69,15 @@ public class DetalleReporteActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Reporte> call, Throwable t) {
+            public void onFailure(Call<ReporteDTO> call, Throwable t) {
                 Toast.makeText(DetalleReporteActivity.this, "Fallo de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
+
     }
 
-    private String formatoFecha(String fechaISO) {
+        private String formatoFecha(String fechaISO) {
         if (fechaISO == null || fechaISO.isEmpty()) return "Fecha no disponible";
         try {
             SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");

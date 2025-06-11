@@ -38,6 +38,10 @@ public interface ReporteApi {
 
     @GET("/api/reporte/{id}")
     Call<Reporte> getReportePorId(@Path("id") int idReporte);
+    @GET("/api/reporte/dto/{id}")
+    Call<ReporteDTO> getReporteDtoPorId(@Path("id") int idReporte);
+
+
 
 
 }

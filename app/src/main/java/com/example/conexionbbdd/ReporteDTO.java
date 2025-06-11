@@ -12,6 +12,11 @@ public class ReporteDTO {
     private String nombreAsignado;
     private String estado;
     private String fecha; // Aquí el string de fecha en formato ISO8601
+    @SerializedName("nombreUsuario")
+    private String nombreUsuario;
+
+
+
 
     // Getters y setters
     public int getId() { return id; }
@@ -34,5 +39,13 @@ public class ReporteDTO {
 
     public String getFecha() { return fecha; }
     public void setFecha(String fecha) { this.fecha = fecha; }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 }
 

@@ -14,6 +14,8 @@ public class Reporte {
     private String fechaCreacion;
     private int idUsuarioAsignado;
 
+    private String nombreCreador;
+
 
     public int getId() { return id; }
     public int getId_usuario() { return id_usuario; }
@@ -34,6 +36,7 @@ public class Reporte {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
+    public String getNombreCreador() { return nombreCreador; }
+    public void setNombreCreador(String nombreCreador) { this.nombreCreador = nombreCreador; }
 
 }
