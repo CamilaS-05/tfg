@@ -30,10 +30,10 @@
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrarse"
+                android:text="REGISTRARSE"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="36sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -131,11 +131,11 @@
             <Button
                 android:id="@+id/btnregistrar"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#000000"
                 android:text="@string/registrar"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:cornerRadius="20dp" />
             <TextView
                 android:id="@+id/lblregistro"
@@ -146,7 +146,7 @@
                 android:text="@string/ya_est_s_registrado"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/lbliniciarsesion"
@@ -157,7 +157,7 @@
                 android:text="Iniciar sesión"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
 
 
