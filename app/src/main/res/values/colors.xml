@@ -19,4 +19,9 @@
     <color name="verdeOscuro">#8AABA6</color>
     <color name="verdeClaro">#D4E3E1</color>
     <color name="blancoVerde">#EBF5F4</color>
+    <!-- colors.xml -->
+    <color name="gray_dark">#666666</color>
+    <color name="blue_700">#1976D2</color>
+    <color name="azulSuave">#BBDEFB</color>
+
 </resources>

@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -75,17 +73,13 @@ public class MainActivityAdmin extends AppCompatActivity {
                         .replace(R.id.content_frame, new FragmentoPerfilAdmin())
                         .commit();
             } else if (id == R.id.nav_usuarios_admin) {
-                Toast.makeText(MainActivityAdmin.this, "Gestión de usuarios", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new FragmentoUsuariosAdmin())
+                        .commit();
             } else if (id == R.id.nav_notificaciones_admin) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentoNotificacionesAdmin())
                         .commit();
-
-            } else if (id == R.id.nav_usuarios_admin) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new FragmentoUsuariosAdmin())
-                        .commit();
-
             } else if (id == R.id.nav_settings_admin) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentoConfigAdmin())
@@ -95,6 +89,7 @@ public class MainActivityAdmin extends AppCompatActivity {
 
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.remove("nombre_admin");
+                editor.remove("id_admin");
                 editor.apply();
 
                 Intent intent = new Intent(MainActivityAdmin.this, LoginAdminActivity.class);

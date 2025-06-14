@@ -1,10 +1,14 @@
 package com.example.conexionbbdd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,10 +40,8 @@ public class FragmentoConfigAdmin extends Fragment {
                 case 0:
                     // Abrir pantalla de perfil
                     FragmentoPerfilConfig perfilFragment = new FragmentoPerfilConfig();
-
                     Bundle args = new Bundle();
 
-                    // Obtener el nombre del admin logueado desde el Intent que abrió esta Activity
                     String nombreAdmin = getActivity().getIntent().getStringExtra("usuario_logueado");
                     args.putString("nombre_Admin", nombreAdmin);
 
@@ -51,17 +53,33 @@ public class FragmentoConfigAdmin extends Fragment {
                             .addToBackStack(null)
                             .commit();
                     break;
+
                 case 1:
-                    // abrir configuración de notificaciones
+                    // Abrir configuración de notificaciones (puedes implementar)
                     break;
+
                 case 2:
-                    // abrir ajustes de apariencia
+                    // Dar de alta administrador (puedes implementar)
                     break;
+
                 case 3:
-                    // confirmar y eliminar cuenta
+                    // Ajustes de apariencia - mostrar selector tema
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Selecciona el tema")
+                            .setItems(new CharSequence[]{"Claro", "Oscuro"}, (dialog, which) -> {
+                                if (which == 0) {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                                    guardarTema("claro");
+                                } else {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                                    guardarTema("oscuro");
+                                }
+                            })
+                            .show();
                     break;
+
                 case 4:
-                    // confirmar y eliminar cuenta
+                    // Confirmar y eliminar cuenta (puedes implementar)
                     break;
             }
         });
@@ -69,5 +87,13 @@ public class FragmentoConfigAdmin extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    private void guardarTema(String tema) {
+        SharedPreferences.Editor editor = requireActivity()
+                .getSharedPreferences("MisPreferenciasAdmin", Context.MODE_PRIVATE)
+                .edit();
+        editor.putString("tema_app", tema);
+        editor.apply();
     }
 }

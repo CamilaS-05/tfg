@@ -1,38 +1,78 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:elevation="4dp"
-    android:padding="12dp"
-    android:layout_marginHorizontal="8dp">
+    android:layout_marginHorizontal="12dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="12dp"
+    android:background="@color/white"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/txtTituloReporte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título"
+            android:text="Título del Reporte"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/txtFechaReporte"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha"
-            android:textSize="12sp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/txtEstadoReporte"
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                app:tint="@color/gray_dark" />
+
+            <TextView
+                android:id="@+id/txtFechaReporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/06/2025"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estado"
-            android:textSize="12sp"
-            android:textColor="@android:color/holo_blue_dark"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/ic_dialog_info"
+                app:tint="@color/blue_700" />
+
+            <TextView
+                android:id="@+id/txtEstadoReporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En Progreso"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
