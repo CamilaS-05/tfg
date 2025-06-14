@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class PantallaPrincipal extends Fragment {
     private List<ReporteDTO> listaReportes = new ArrayList<>();
 
     private LinearLayout navIncidencias, navPerfil, navSoporte;
+    private SwipeRefreshLayout swipeRefresh;
 
     public PantallaPrincipal() {}
 
@@ -52,6 +54,8 @@ public class PantallaPrincipal extends Fragment {
         navPerfil = view.findViewById(R.id.navPerfil);
         navSoporte = view.findViewById(R.id.navSoporte);
 
+        swipeRefresh = view.findViewById(R.id.swipeRefresh);
+
         // Mostrar saludo
         SharedPreferences prefs = requireActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         String nombreUsuario = prefs.getString("nombre_usuario", "Usuario");
@@ -63,7 +67,11 @@ public class PantallaPrincipal extends Fragment {
         recyclerReportes.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerReportes.setAdapter(adapter);
 
-        // Buscar reportes desde API
+        // SwipeRefresh: al hacer swipe, recargar lista
+        swipeRefresh.setOnRefreshListener(() -> obtenerReportesAsignados(idUsuario));
+
+        // Buscar reportes desde API (primera carga)
+        swipeRefresh.setRefreshing(true); // mostrar carga inicial
         obtenerReportesAsignados(idUsuario);
 
         // Buscar texto en vivo
@@ -114,13 +122,13 @@ public class PantallaPrincipal extends Fragment {
         call.enqueue(new Callback<List<ReporteDTO>>() {
             @Override
             public void onResponse(Call<List<ReporteDTO>> call, Response<List<ReporteDTO>> response) {
+                swipeRefresh.setRefreshing(false);  // Parar carga en éxito
                 if (response.isSuccessful() && response.body() != null) {
                     List<ReporteDTO> filtrados = new ArrayList<>();
 
                     for (ReporteDTO reporte : response.body()) {
                         String estado = reporte.getEstado();
 
-                        // Depuración: mostrar el estado recibido
                         Log.d("ESTADO_REPORTE", "Estado: [" + estado + "]");
 
                         if (estado != null) {
@@ -131,11 +139,10 @@ public class PantallaPrincipal extends Fragment {
                         }
                     }
 
-                    // Depuración: cuántos reportes cumplen el filtro
                     Log.d("API_DEBUG", "Total reportes filtrados: " + filtrados.size());
 
                     listaReportes.clear();
-                    listaReportes.addAll(filtrados);  // filtrados ya solo tiene pendientes y en proceso
+                    listaReportes.addAll(filtrados);
                     adapter.setListaCompleta(listaReportes);
                     adapter.notifyDataSetChanged();
                 } else {
@@ -145,9 +152,9 @@ public class PantallaPrincipal extends Fragment {
 
             @Override
             public void onFailure(Call<List<ReporteDTO>> call, Throwable t) {
+                swipeRefresh.setRefreshing(false);  // Parar carga en fallo
                 Log.e("API_DEBUG", "Error al obtener reportes asignados", t);
             }
         });
     }
-
 }
