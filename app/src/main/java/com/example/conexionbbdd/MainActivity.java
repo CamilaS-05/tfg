@@ -30,6 +30,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Cargar tema antes de setContentView para que se aplique bien
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+        String tema = prefs.getString("tema_app", "claro");
+
+        if (tema.equals("oscuro")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -46,16 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-
-        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-        String tema = prefs.getString("tema_app", "claro");
-
-        if (tema.equals("oscuro")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
 
         // Configurar el nombre en el encabezado del NavigationView
         View headerView = navigationView.getHeaderView(0);

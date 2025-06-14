@@ -18,8 +18,5 @@
     <color name="strokeColor">#E0E0E0</color>
     <color name="verdeOscuro">#8AABA6</color>
     <color name="verdeClaro">#D4E3E1</color>
-    <color name="blancoVerde">#EBF5F4</color>    <!-- Borde de tarjeta gris claro -->
-
-
-
+    <color name="blancoVerde">#EBF5F4</color>
 </resources>

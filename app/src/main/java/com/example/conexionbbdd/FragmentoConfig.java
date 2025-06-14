@@ -1,14 +1,14 @@
 package com.example.conexionbbdd;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -19,15 +19,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Arrays;
 import java.util.List;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class FragmentoConfig extends Fragment {
 
@@ -47,7 +43,6 @@ public class FragmentoConfig extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerMisReportes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         lista = Arrays.asList(
                 new OpcionConfig("Perfil", R.drawable.persona),
                 new OpcionConfig("Notificaciones", R.drawable.ic_notificaciones),
@@ -59,13 +54,15 @@ public class FragmentoConfig extends Fragment {
             switch (position) {
                 case 0:
                     // Abrir pantalla de edición de perfil
-                    Intent intent = new Intent(getContext(), EditarPerfilActivity.class);
-                    startActivity(intent);
+                    Intent intentPerfil = new Intent(getContext(), EditarPerfilActivity.class);
+                    startActivity(intentPerfil);
                     break;
 
                 case 1:
-                    // abrir configuración de notificaciones
+                    // Aquí podrías abrir configuración de notificaciones
+                    Toast.makeText(getContext(), "Funcionalidad no implementada aún", Toast.LENGTH_SHORT).show();
                     break;
+
                 case 2:
                     new AlertDialog.Builder(getContext())
                             .setTitle("Selecciona el tema")
@@ -79,43 +76,30 @@ public class FragmentoConfig extends Fragment {
                                 }
                             })
                             .show();
-
                     break;
+
                 case 3:
-                    // Mostrar diálogo para confirmar eliminación
                     new AlertDialog.Builder(getContext())
                             .setTitle("Confirmar eliminación")
                             .setMessage("¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")
-                            .setPositiveButton("Eliminar", (dialog, which) -> {
-                                eliminarCuenta();
-                            })
+                            .setPositiveButton("Eliminar", (dialog, which) -> eliminarCuenta())
                             .setNegativeButton("Cancelar", null)
                             .show();
                     break;
-
             }
         });
 
         recyclerView.setAdapter(adapter);
 
-
-
-        // Configurar SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            // Aquí iría la lógica para refrescar datos,
-            // ahora simplemente refrescamos la lista estática
-
-            // Si la lista viniera de un servidor, aquí harías la llamada para actualizar
-
-            // Simulamos refresco de datos llamando notifyDataSetChanged
+            // Refrescar datos (aquí es estático, solo actualizamos la vista)
             adapter.notifyDataSetChanged();
-
-            // Detenemos el indicador de refresco
             swipeRefreshLayout.setRefreshing(false);
         });
 
         return view;
     }
+
     private void guardarTema(String tema) {
         SharedPreferences.Editor editor = requireActivity()
                 .getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
@@ -123,39 +107,36 @@ public class FragmentoConfig extends Fragment {
         editor.putString("tema_app", tema);
         editor.apply();
     }
+
     private void eliminarCuenta() {
-        SharedPreferences prefs = getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        Long idUsuario = prefs.getLong("id_usuario", -1);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        long idUsuario = prefs.getLong("id_usuario", -1);
 
         if (idUsuario == -1) {
             Toast.makeText(getActivity(), "Error: usuario no identificado", Toast.LENGTH_SHORT).show();
             return;
         }
 
-// Llamada Retrofit para eliminar usuario
         UsuarioApi api = RetrofitClient.getRetrofitInstance().create(UsuarioApi.class);
         Call<ResponseBody> call = api.eliminarUsuario(idUsuario, "incidencias");
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getActivity(), "Cuenta eliminada correctamente", Toast.LENGTH_SHORT).show();
-                    // Redirigir a LoginActivity y cerrar la actual
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
-                    getActivity().finish();
+                    requireActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), "Error en la conexión", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 }
-}
-
-

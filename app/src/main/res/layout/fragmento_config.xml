@@ -32,6 +32,7 @@
 
     </LinearLayout>
 
+
     <!-- SwipeRefreshLayout envolviendo RecyclerView -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
