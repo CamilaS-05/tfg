@@ -13,10 +13,11 @@
         android:text="ASIGNAR INCIDENCIAS"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#000000"
-        android:fontFamily="@font/montserrat_regular"
+        android:textColor="?attr/colorOnSurface"
+        android:fontFamily="@font/montserrat_semibold"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"/>
 
 
     <!-- EditText para filtro por texto -->
@@ -49,8 +50,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:backgroundTint="#6200EE"
-            android:popupBackground="#FFFFFF"
+            android:backgroundTint="@color/verdeOscuro"
+            android:popupBackground="@color/white"
             android:spinnerMode="dropdown"
             android:padding="8dp"/>
 
@@ -60,8 +61,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:backgroundTint="#6200EE"
-            android:popupBackground="#FFFFFF"
+            android:backgroundTint="@color/verdeOscuro"
+            android:popupBackground="@color/white"
             android:spinnerMode="dropdown"
             android:padding="8dp"/>
     </LinearLayout>

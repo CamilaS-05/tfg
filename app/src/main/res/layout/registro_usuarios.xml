@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="REGISTRARSE"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:hint="Nombre y Apellidos"
                 android:inputType="text|textPersonName"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -63,7 +63,7 @@
                 android:hint="Correo Electronico"
                 android:inputType="text|textEmailAddress"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -78,7 +78,7 @@
                 android:hint="Telefono Movil"
                 android:inputType="phone"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -93,7 +93,7 @@
                 android:hint="Usuario"
                 android:inputType="text"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -109,7 +109,7 @@
 
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -124,7 +124,7 @@
                 android:hint="Repetir Contraseña"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
 
@@ -145,7 +145,7 @@
                 android:padding="6dp"
                 android:text="@string/ya_est_s_registrado"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
@@ -156,7 +156,7 @@
                 android:padding="6dp"
                 android:text="Iniciar sesión"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 

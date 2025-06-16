@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre Completo del Usuario"
-            android:textColor="#212121"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium" />
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="correo@example.com"
-            android:textColor="#757575"
+            android:textColor="@color/girsVerdoso"
             android:textSize="15sp"
             android:layout_marginTop="6dp" />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Teléfono: 123-456-789"
-            android:textColor="#757575"
+            android:textColor="@color/girsVerdoso"
             android:textSize="15sp"
             android:layout_marginTop="4dp" />
 

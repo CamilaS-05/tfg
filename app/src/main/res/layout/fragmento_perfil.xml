@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#FFFFFF"
+        android:background="@drawable/card_background"
         android:elevation="4dp"
         android:padding="24dp"
         android:layout_margin="8dp"
@@ -32,10 +32,10 @@
             android:layout_marginTop="8dp" />
 
         <TextView
-            android:text="Perfil del Usuario"
+            android:text="PERFIL DEL USUARIO"
             android:layout_gravity="center"
-            android:textSize="22sp"
-            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
@@ -44,92 +44,48 @@
         <!-- Resto de campos y botones igual... -->
         <!-- Nombre -->
         <TextView android:text="Nombre completo"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_nombre_usuario"
             android:enabled="false"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Teléfono -->
         <TextView android:text="Teléfono"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_telefono_usuario"
             android:enabled="false"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Correo -->
         <TextView android:text="Correo"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_correo_usuario"
             android:enabled="false"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Contraseña -->
-        <TextView android:text="Nueva Contraseña"
-            android:textColor="#555"
-            android:layout_marginTop="24dp"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_nueva_contrasena_usuario"
-            android:hint="Escribe nueva contraseña"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:visibility="gone"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <!-- Repetir Contraseña -->
-        <TextView
-            android:text="Repetir Contraseña"
-            android:textColor="#555"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_repetir_contrasena_usuario"
-            android:hint="Repite la contraseña"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-        <!-- Botón -->
-        <Button
-            android:id="@+id/btn_cambiar_contrasena_usuario"
-            android:text="Cambiar Contraseña"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#3F51B5"
-            android:visibility="gone"/>
 
         <View
             android:layout_width="match_parent"

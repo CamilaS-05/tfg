@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@drawable/card_background"
         android:elevation="4dp"
         android:padding="24dp"
         android:layout_margin="8dp"
@@ -29,9 +29,9 @@
             android:layout_marginTop="8dp" />
 
         <TextView
-            android:text="Configuración del Administrador"
+            android:text="   EDITAR PERFIL \n ADMINISTRADOR"
             android:layout_gravity="center"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textColor="#333333"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
@@ -40,59 +40,60 @@
 
         <!-- Nombre -->
         <TextView android:text="Usuario"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editTextNombreUsuario"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Escribe nuevo usuario"/>
 
         <!-- Teléfono -->
         <TextView android:text="Teléfono"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editTextTelefonoUsuario"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Escribe nuevo teléfono"/>
 
         <!-- Correo -->
         <TextView android:text="Correo"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editTextCorreoUsuario"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Escribe nuevo correo"/>
 
         <!-- Contraseña -->
         <TextView android:text="Nueva Contraseña"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editTextNuevaContrasenaUsuario"
             android:hint="Escribe nueva contraseña"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
+            android:textColor="?attr/colorOnSurface"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -106,20 +107,21 @@
         <EditText
             android:id="@+id/editTextConfirmarContrasenaUsuario"
             android:hint="Repite la contraseña"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
+            android:textColor="?attr/colorOnSurface"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Botón -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarCambiosUsuario"
             android:text="Guardar Cambios"
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
+            android:foreground="?attr/selectableItemBackground"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#3F51B5" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

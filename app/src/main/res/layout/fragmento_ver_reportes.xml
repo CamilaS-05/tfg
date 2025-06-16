@@ -14,8 +14,9 @@
         android:drawableStart="@android:drawable/ic_menu_search"
         android:padding="10dp"
         android:inputType="text"
-        android:background="@color/blancoVerde"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/card_background"
+        android:layout_marginBottom="20dp"
         />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

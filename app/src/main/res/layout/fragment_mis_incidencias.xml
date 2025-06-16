@@ -15,13 +15,16 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp">
 
         <TextView
             android:id="@+id/textTituloMisIncidencias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mis Incidencias Asignadas"
+            android:text="INCIDENCIAS ASIGNADAS"
+            android:fontFamily="@font/montserrat_semibold"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center" />

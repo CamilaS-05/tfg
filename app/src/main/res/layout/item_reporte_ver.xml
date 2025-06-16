@@ -23,7 +23,7 @@
             android:text="Asunto del reporte"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="#212121"
+            android:textColor="?attr/colorOnSurface"
             android:fontFamily="sans-serif-medium" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Descripción del reporte que puede ocupar hasta dos líneas y termina con puntos suspensivos si es muy largo."
             android:textSize="15sp"
-            android:textColor="#616161"
+            android:textColor="@color/girsVerdoso"
             android:layout_marginTop="6dp"
             android:maxLines="2"
             android:ellipsize="end" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Estado: Pendiente"
             android:textSize="15sp"
-            android:textColor="#2962FF"
+            android:textColor="@color/girsVerdoso"
             android:layout_marginTop="12dp"
             android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Fecha: 2025-05-28"
             android:textSize="13sp"
-            android:textColor="#9E9E9E"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="6dp" />
 
     </LinearLayout>

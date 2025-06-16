@@ -37,16 +37,9 @@ public class FragmentoPerfil extends Fragment {
         etNombre = view.findViewById(R.id.et_nombre_usuario);
         etTelefono = view.findViewById(R.id.et_telefono_usuario);
         etCorreo = view.findViewById(R.id.et_correo_usuario);
-        etNuevaContrasena = view.findViewById(R.id.et_nueva_contrasena_usuario);
-        etRepetirContrasena = view.findViewById(R.id.et_repetir_contrasena_usuario);
-        btnCambiarContrasena = view.findViewById(R.id.btn_cambiar_contrasena_usuario);
 
 
         cargarDatosUsuario();
-
-        btnCambiarContrasena.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Funcionalidad cambiar contraseña pendiente", Toast.LENGTH_SHORT).show();
-        });
 
         return view;
     }

@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@drawable/edittext_background"
         android:elevation="4dp"
         android:padding="24dp"
         android:layout_margin="8dp"
@@ -21,9 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Detalle del Reporte"
+            android:fontFamily="@font/montserrat_semibold"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#212121"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp" />
 
@@ -32,16 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Asunto"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:layout_marginBottom="4dp" />
         <TextView
             android:id="@+id/txtTituloReporte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="8dp"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:textSize="16sp" />
 
         <!-- Descripción -->
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Descripción"
-            android:textColor="#555"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp" />
@@ -57,9 +58,9 @@
             android:id="@+id/txtDescripcionReporte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="8dp"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:textSize="16sp" />
 
         <!-- Fecha -->
@@ -67,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Fecha de creación"
-            android:textColor="#555"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp" />
@@ -75,9 +76,9 @@
             android:id="@+id/txtFechaReporte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="8dp"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:textSize="16sp" />
 
         <!-- Usuario creador -->
@@ -85,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Usuario creador"
-            android:textColor="#555"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp" />
@@ -94,9 +95,9 @@
             android:id="@+id/txtUsuarioReporte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="8dp"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:textSize="16sp" />
 
     </LinearLayout>

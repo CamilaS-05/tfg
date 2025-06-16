@@ -27,7 +27,8 @@
             android:text="CONFIGURACIÓN"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/montserrat_semibold"/>
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="?attr/colorOnSurface"/>
 
 
     </LinearLayout>

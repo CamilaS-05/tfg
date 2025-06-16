@@ -24,7 +24,7 @@
             android:text="Asunto"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#222222" />
+            android:textColor="@color/girsVerdoso" />
 
         <TextView
             android:id="@+id/txtEstado"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Estado"
             android:textSize="14sp"
-            android:textColor="#555555"
+            android:textColor="@color/grisClaro"
             android:layout_marginTop="6dp" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="Fecha"
             android:textSize="14sp"
-            android:textColor="#777777"
+            android:textColor="@color/grisClaro"
             android:layout_marginTop="4dp" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="Asignado a: Sin asignar"
             android:textSize="14sp"
-            android:textColor="#444444"
+            android:textColor="@color/girsVerdoso"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium" />
         <com.google.android.material.button.MaterialButton
@@ -60,10 +60,9 @@
             android:text="Asignar Reporte"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/verdeOscuro"
-            android:textColor="#263238"
+            android:textColor="?attr/colorOnSurface"
             app:cornerRadius="12dp"
             app:strokeColor="#90A4AE"
-            app:strokeWidth="2dp"
             android:fontFamily="sans-serif-medium"
             android:elevation="4dp" />
 

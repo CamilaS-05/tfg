@@ -34,7 +34,7 @@
             android:textSize="18sp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="@android:color/black" />
+            android:textColor="?attr/colorOnSurface" />
     </LinearLayout>
 
     <EditText
@@ -49,7 +49,7 @@
         android:drawableStart="@android:drawable/ic_menu_search"
         android:drawablePadding="8dp"
         android:background="@drawable/search_edittext_background"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
         />
 
@@ -60,7 +60,7 @@
         android:text="Tareas Pendientes"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSurface"
         android:layout_below="@id/etBuscar"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp" />

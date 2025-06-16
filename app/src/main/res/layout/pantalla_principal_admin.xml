@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="¡Hola, Administrador!"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
         android:text="Panel de Administración"
-        android:textColor="#616161"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSaludoAdmin"
@@ -75,7 +75,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="Acciones Rápidas"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Ver Reportes"
                     android:textAlignment="center"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -163,7 +163,7 @@
                     android:text="Gestionar Usuarios"
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
@@ -179,7 +179,7 @@
         android:text="Reportes más recientes"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quickActions"
         app:layout_constraintEnd_toEndOf="parent" />

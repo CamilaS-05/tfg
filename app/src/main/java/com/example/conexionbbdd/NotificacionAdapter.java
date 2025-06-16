@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +36,7 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Notificacion noti = lista.get(position);
         holder.mensaje.setText(noti.getMensaje());
-        holder.fecha.setText(noti.getFecha());
+        holder.fecha.setText(formatoFecha(noti.getFecha()));
 
         if (noti.getMensaje() != null && noti.getMensaje().contains("por ")) {
             String[] partes = noti.getMensaje().split("por ");
@@ -108,6 +110,19 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             }
         });
     }
+
+    private String formatoFecha(String fechaISO) {
+        if (fechaISO == null || fechaISO.isEmpty()) return "Fecha no disponible";
+        try {
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date date = isoFormat.parse(fechaISO);
+            SimpleDateFormat formatoLocal = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return formatoLocal.format(date);
+        } catch (Exception e) {
+            return fechaISO;
+        }
+    }
+
 
     @Override
     public int getItemCount() {

@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@drawable/card_background"
         android:elevation="4dp"
         android:padding="24dp"
         android:layout_margin="8dp"
@@ -29,10 +29,10 @@
             android:layout_marginTop="8dp" />
 
         <TextView
-            android:text="Perfil del Administrador"
+            android:text="PERFIL DEL ADMINISTRADOR"
             android:layout_gravity="center"
-            android:textSize="22sp"
-            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
@@ -40,47 +40,48 @@
 
         <!-- Nombre -->
         <TextView android:text="Nombre completo"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_nombre_admin"
             android:enabled="false"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Teléfono -->
         <TextView android:text="Teléfono"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_telefono_admin"
             android:enabled="false"
-            android:background="@drawable/edittext_background"
+            android:background="@color/verdeClaro"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Correo -->
         <TextView android:text="Correo"
-            android:textColor="#555"
+            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/et_correo_admin"
-            android:enabled="false"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:textColor="#000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/verdeClaro"
+            android:enabled="false"
+            android:padding="12dp"
+            android:textColor="?attr/colorOnSurface" />
 
     </LinearLayout>
 </ScrollView>

@@ -70,7 +70,7 @@ public class UltimosReportesAdapter extends RecyclerView.Adapter<UltimosReportes
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTituloReporte);
             txtFecha = itemView.findViewById(R.id.txtFechaReporte);
-            txtEstado = itemView.findViewById(R.id.txtEstadoReporte);
+            txtEstado = itemView.findViewById(R.id.textViewEstado);
         }
     }
 }

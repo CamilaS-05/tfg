@@ -33,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:text="INICIO DE SESIÓN"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textColorLink="#000000"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorLink="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold">
 
@@ -52,7 +52,7 @@
                 android:textStyle="bold"
                 android:ems="10"
                 android:inputType="text"
-                android:textColor="#000000"
+                android:textColor="?attr/colorOnSurface"
                 tools:ignore="InvalidId" />
             <EditText
                 android:id="@+id/contrasena"
@@ -67,7 +67,7 @@
                 android:textStyle="bold"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:textColor="#000000"/>
+                android:textColor="?attr/colorOnSurface" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/botoniniciarsesion"
@@ -75,9 +75,9 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/amarillento"
-                android:text="Iniciar Sesión"
-                android:textColor="#000000"
-                android:textSize="18sp"
+                android:text="INICIAR SESIÓN"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="15sp"
                 app:cornerRadius="20dp"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="20dp"/>
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="¿Aún no tienes una cuenta?"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
@@ -101,8 +101,8 @@
                 android:layout_height="wrap_content"
                 android:text="Registrarte Ahora"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textColorLink="#000000"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorLink="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
@@ -114,14 +114,12 @@
                 android:layout_height="wrap_content"
                 android:text="Acceder como administrador"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textColorLink="#000000"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorLink="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 />
-
-
 
         </LinearLayout>
 

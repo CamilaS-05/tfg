@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Básicos -->
-    <color name="black">#FF000000</color> <!-- Igual, negro puro -->
-    <color name="white">#FFFFFFFF</color> <!-- Igual, blanco puro -->
+    <color name="black">#FFFFFF</color>
+    <color name="white">#000000</color>
 
     <!-- Colores primarios -->
-    <color name="colorPrimary">#8E7CC3</color>      <!-- Púrpura oscuro menos saturado -->
-    <color name="colorPrimaryDark">#6F5BB0</color>  <!-- Púrpura profundo pero suave -->
-    <color name="colorAccent">#FBC02D</color>       <!-- Amarillo vibrante, cálido -->
-    <color name="colorSecondary">#1B8E85</color>    <!-- Teal más profundo y apagado -->
+    <color name="colorPrimary">#8E7CC3</color>
+    <color name="colorPrimaryDark">#6F5BB0</color>
+    <color name="colorAccent">#FBC02D</color>
+    <color name="colorSecondary">#1B8E85</color>
 
     <!-- Fondos -->
-    <color name="backgroundLight">#121212</color>   <!-- Fondo oscuro principal (muy oscuro) -->
-    <color name="cardBackground">#232323</color>    <!-- Fondo tarjeta un poco más claro que fondo -->
-    <color name="strokeColor">#444444</color>       <!-- Bordes sutiles, gris medio oscuro -->
+    <color name="backgroundLight">#121212</color>
+    <color name="cardBackground">#232323</color>
+    <color name="strokeColor">#444444</color>
 
     <!-- Textos -->
-    <color name="textDark">#E0E0E0</color>          <!-- Texto claro -->
-    <color name="textMedium">#9E9E9E</color>        <!-- Texto gris medio (más suave) -->
+    <color name="textDark">#E0E0E0</color>
+    <color name="textMedium">#9E9E9E</color>
 
     <!-- Tonos verdes -->
-    <color name="verdeOscuro">#4B7A75</color>       <!-- Verde oscuro, algo apagado -->
-    <color name="verdeClaro">#7B9A96</color>        <!-- Verde claro más suave -->
-    <color name="blancoVerde">#2B4D4A</color>       <!-- Verde muy oscuro, casi negro -->
+    <color name="verdeOscuro">#4B7A75</color>
+    <color name="verdeClaro">#7B9A96</color>
+    <color name="blancoVerde">#AFC3C0</color>
 
-    <!-- Otros colores -->
-    <color name="green">#03DAC6</color>             <!-- Verde aguamarina vibrante -->
-    <color name="purple">#FFFFFF</color>            <!-- Blanco puro para contraste -->
-    <color name="azul">#4B8C9A</color>               <!-- Azul apagado y elegante -->
-    <color name="azulClaro">#6D85B2</color>          <!-- Azul claro más frío -->
-    <color name="amarillento">#3BA973</color>        <!-- Amarillo verdoso más apagado -->
+    <!-- Otros colores adaptados -->
+    <color name="green">#00BFA5</color>
+    <color name="purple">#D1C4E9</color>
+    <color name="azul">#4B8C9A</color>
+    <color name="azulClaro">#6D85B2</color>
+    <color name="amarillento">#3BA973</color>
+
+    <!-- FALTANTES añadidos -->
+    <color name="gray_dark">#AAAAAA</color>
+    <color name="blue_700">#64B5F6</color>
+    <color name="azulSuave">#5C94C9</color>
+    <color name="girsVerdoso">#E5E5E5</color>
+    <color name="grisClaro">#90A4AE</color>
 </resources>

@@ -24,9 +24,9 @@
             android:paddingEnd="16dp"
             android:textAlignment="center"
             app:title="REPORTEX"
+            android:fontFamily="@font/montserrat_semibold"
             app:titleTextColor="@android:color/white"
-            app:titleCentered="true"
-            android:fontFamily="cursive" />
+            app:titleCentered="true" />
 
         <!-- Contenido -->
         <FrameLayout

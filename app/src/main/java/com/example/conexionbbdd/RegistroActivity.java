@@ -130,7 +130,7 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-       /*  if (password.length() < 8) {
+        if (password.length() < 8) {
             showToast("La contraseña debe tener al menos 8 caracteres");
             return;
         }
@@ -159,7 +159,7 @@ public class RegistroActivity extends AppCompatActivity {
             showToast("La contraseña no debe contener espacios");
             return;
         }
-        */
+
 
         // ✅ Si todas las validaciones pasan, proceder al registro
         String origenApp = "incidencias";
